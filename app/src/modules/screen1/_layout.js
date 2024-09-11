@@ -10,7 +10,6 @@ import Third from "./(tabs)/third";
 export default function Layout() {
   const Tab = createMaterialTopTabNavigator();
   return (
-    <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Basic Information"
         screenOptions={{
@@ -35,6 +34,5 @@ export default function Layout() {
         <Tab.Screen name="Social Information" component={Second} />
         <Tab.Screen name="Other" component={Third} />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }

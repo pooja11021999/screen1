@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
 
-import CustomText from "../../../../assets/commonElements/text";
+import CustomText from "../../../../../assets/commonElements/text";
 
 const ContactCard = () => {
   const [cardHeight, setCardHeight] = useState(0);

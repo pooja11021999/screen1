@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
-import CustomText from "../../../../assets/commonElements/text";
-import HeaderMenu from "../../components/header";
-import RatingStars from "../../components/ratingStars";
+import CustomText from "../../../../../assets/commonElements/text";
+import HeaderMenu from "../../../components/header";
+import RatingStars from "../../../components/ratingStars";
 
 const Header = ({ data }) => {
   const { title, indType, lastConnect, ratingPer } = data;
