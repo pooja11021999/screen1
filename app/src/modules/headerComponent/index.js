@@ -12,15 +12,15 @@ const Header = ({ data }) => {
     <View style={styles.container}>
       <HeaderMenu menu={true} refresh={true} />
       <View style={styles.contentContainer}>
-        <CustomText text={title} externalStyle={{fontSize: 20, marginBottom: 4 }}/>
+        <CustomText text={title} externalStyle={styles.textStyle} />
         <RatingStars rating={ratingPer} />
 
         <View style={styles.detailsStyle}>
-          <CustomText text={indType}/>
+          <CustomText text={indType} />
 
-          <View style={{ flexDirection: "row" }}>
-            <CustomText text='Last contacted on: '/>
-            <CustomText text={lastConnect}/>
+          <View style={styles.lastConnectStyle}>
+            <CustomText text="Last contacted on: " />
+            <CustomText text={lastConnect} />
           </View>
         </View>
       </View>
@@ -43,4 +43,9 @@ export const styles = StyleSheet.create({
   contentContainer: {
     paddingTop: 15,
   },
+  textStyle: {
+    fontSize: 20,
+    marginBottom: 4,
+  },
+  lastConnectStyle: { flexDirection: "row" },
 });

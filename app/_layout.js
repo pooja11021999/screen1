@@ -17,6 +17,7 @@ export default function Layout() {
           tabBarInactiveTintColor: "#B2BEB5",
           tabBarIndicatorStyle: {
             backgroundColor: "#00477f",
+            height:3
           },
           tabBarLabelStyle: {
             flex: 1,

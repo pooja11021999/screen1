@@ -21,7 +21,7 @@ const ContactCard = () => {
       <View style={styles.textContainer}>
         <CustomText
           text={"Active"}
-          externalStyle={{ color: "orange", marginBottom: 10 }}
+          externalStyle={styles.textStyle}
         />
       </View>
       <View style={styles.iconContainer}>
@@ -79,4 +79,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "center",
   },
+  textStyle:{ 
+    color: "orange", 
+    marginBottom: 10 
+  }
 });
