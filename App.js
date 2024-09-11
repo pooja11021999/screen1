@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   firstBoxStyle: {
-    flex: 0.9,
+    flex: 1,
     backgroundColor: "#00477f",
   },
-  secondBoxStyle: { flex: 2.1 },
+  secondBoxStyle: { flex: 2 },
 });

@@ -35,10 +35,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 15,
-    paddingVertical: 4,
+    paddingVertical: 6,
   },
   detailsStyle: {
     paddingTop: 10,
+    marginTop:20
   },
   contentContainer: {
     paddingTop: 15,
