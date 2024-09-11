@@ -1,6 +1,8 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useRef, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { moderateScale, scale } from "react-native-size-matters";
+
 import CustomText from "../../../../assets/commonElements/text";
 
 const ContactCard = () => {
@@ -19,24 +21,21 @@ const ContactCard = () => {
       style={[styles.container, { top: -(cardHeight / 3) }]}
     >
       <View style={styles.textContainer}>
-        <CustomText
-          text={"Active"}
-          externalStyle={styles.textStyle}
-        />
+        <CustomText text={"Active"} externalStyle={styles.textStyle} />
       </View>
       <View style={styles.iconContainer}>
         <FontAwesome
           name="envelope"
-          size={30}
+          size={scale(30)}
           color="#B2BEB5"
           style={styles.icon}
         />
         <View style={styles.circleIconContainer}>
-          <FontAwesome name="phone" size={20} color="#fff" />
+          <FontAwesome name="phone" size={scale(20)} color="#fff" />
         </View>
         <FontAwesome
           name="whatsapp"
-          size={30}
+          size={scale(30)}
           color="#B2BEB5"
           style={styles.icon}
         />
@@ -50,10 +49,10 @@ export default ContactCard;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    elevation: 4,
-    padding: 15,
-    marginHorizontal: 26,
-    borderRadius: 12,
+    elevation: moderateScale(4),
+    padding: scale(15),
+    marginHorizontal: scale(26),
+    borderRadius: scale(12),
     flexDirection: "row",
   },
   iconContainer: {
@@ -63,24 +62,24 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   circleIconContainer: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: scale(30),
+    height: scale(30),
+    borderRadius: scale(15),
     backgroundColor: "#B2BEB5",
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 10,
-    marginLeft: 20,
+    marginHorizontal: scale(10),
+    marginLeft: scale(20),
   },
   icon: {
-    marginLeft: 10,
+    marginLeft: scale(10),
   },
   textContainer: {
     flex: 1,
     alignSelf: "center",
   },
-  textStyle:{ 
-    color: "orange", 
-    marginBottom: 10 
-  }
+  textStyle: {
+    color: "orange",
+    marginBottom: scale(10),
+  },
 });

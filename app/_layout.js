@@ -1,5 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { scale, verticalScale } from "react-native-size-matters";
+
 import Index from "./(tabs)";
 import First from "./(tabs)/first";
 import Second from "./(tabs)/second";
@@ -17,11 +19,11 @@ export default function Layout() {
           tabBarInactiveTintColor: "#B2BEB5",
           tabBarIndicatorStyle: {
             backgroundColor: "#00477f",
-            height:3
+            height: verticalScale(3),
           },
           tabBarLabelStyle: {
             flex: 1,
-            maxWidth: 250,
+            maxWidth: scale(250),
           },
           tabBarItemStyle: {
             width: "auto",

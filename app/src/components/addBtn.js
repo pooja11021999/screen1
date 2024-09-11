@@ -1,11 +1,12 @@
+import { Octicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Octicons } from "@expo/vector-icons";
+import { scale } from "react-native-size-matters";
 
 const AddBtn = () => {
   return (
     <View style={styles.container}>
-      <Octicons name="plus" color="#fff" size={25}/>
+      <Octicons name="plus" color="#fff" size={scale(25)} />
     </View>
   );
 };
@@ -17,10 +18,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    right: 30,
-    bottom: 30,
-    width: 50,
-    height: 50,
-    borderRadius:25
+    right: scale(30),
+    bottom: scale(30),
+    width: scale(50),
+    height: scale(50),
+    borderRadius: scale(25),
   },
 });
