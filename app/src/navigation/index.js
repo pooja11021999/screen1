@@ -1,12 +1,16 @@
-import { Entypo, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import {
+  Entypo,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
-import CompanyList from '../modules/screen2';
-import DetailsScreen from '../modules/screen1';
 
+import DetailsScreen from "../modules/screen1";
+import CompanyList from "../modules/screen2";
 
 const Stack = createStackNavigator();
 
@@ -14,16 +18,33 @@ const StackNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Company">
-        <Stack.Screen name="Company" component={CompanyList} options={{
-          headerStyle:{backgroundColor:'#00477f',padding:10},
-          headerTitleStyle:{color:'white'},
-          headerLeft:() => <Entypo name="menu" size={scale(20)} color={'white'}/>,
-          headerLeftContainerStyle:{paddingLeft:10},
-          headerRight: () => <View style={{flexDirection:'row', paddingRight: 10}}>
-            <MaterialCommunityIcons name='sort-variant' color='#fff' size={scale(23)}/>
-            <MaterialIcons name='filter-list' color='#fff' size={scale(23)}style={{marginLeft:20}}/>
-          </View>
-        }} />
+        <Stack.Screen
+          name="Company"
+          component={CompanyList}
+          options={{
+            headerStyle: styles.companyListHeader,
+            headerTitleStyle: styles.companyListHeaderTitle,
+            headerLeft: () => (
+              <Entypo name="menu" size={scale(20)} color={"white"} />
+            ),
+            headerLeftContainerStyle: styles.leftHeaderOfCompanyList,
+            headerRight: () => (
+              <View style={styles.rightHeaderOfCompanyList}>
+                <MaterialCommunityIcons
+                  name="sort-variant"
+                  color="#fff"
+                  size={scale(23)}
+                />
+                <MaterialIcons
+                  name="filter-list"
+                  color="#fff"
+                  size={scale(23)}
+                  style={styles.filterIcon}
+                />
+              </View>
+            ),
+          }}
+        />
         <Stack.Screen
           name="DetailScreen"
           component={DetailsScreen}
@@ -31,7 +52,26 @@ const StackNavigation = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export default StackNavigation
+export default StackNavigation;
+
+export const styles = StyleSheet.create({
+  filterIcon: {
+    marginLeft: scale(20),
+  },
+  rightHeaderOfCompanyList: {
+    flexDirection: "row",
+    paddingRight: scale(10),
+  },
+  leftHeaderOfCompanyList: {
+    paddingLeft: scale(10),
+  },
+  companyListHeader: {
+    backgroundColor: "#00477f",
+  },
+  companyListHeaderTitle: {
+    color: "#fff",
+  },
+});

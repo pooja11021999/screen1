@@ -6,14 +6,17 @@ import CustomText from "../../../../../assets/commonElements/text";
 import HeaderMenu from "../../../components/header";
 import RatingStars from "../../../components/ratingStars";
 
-const Header = ({ data }) => {
+const Header = ({ data, navigation, item }) => {
   const { title, indType, lastConnect, ratingPer } = data;
+  const onLeftBtnPress = () => {
+    navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
-      <HeaderMenu menu={true} refresh={true} />
+      <HeaderMenu menu={true} refresh={true} onLeftBtnPress={onLeftBtnPress} />
       <View style={styles.contentContainer}>
-        <CustomText text={title} externalStyle={styles.textStyle} />
+        <CustomText text={item?.name} externalStyle={styles.textStyle} />
         <RatingStars rating={ratingPer} />
 
         <View style={styles.detailsStyle}>

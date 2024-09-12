@@ -1,34 +1,28 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const Card = ({ item }) => {
+const Card = ({ item, getDetails }) => {
+  
   return (
-    <View style={styles.cardStyle}>
-        <View>
+    <TouchableOpacity style={styles.cardStyle} onPress={() => getDetails(item)}>
+      <View>
         <Text style={styles.cardKeyStyle}>{item.name}</Text>
-      <Text
-        style={[
-          styles.cardValueStyle,
-        ]}
-      >
-        {item.city}
-      </Text>
-        </View>
-        <View>
-            <Text>{item.status}</Text>
-        </View>
-      
-    </View>
+        <Text style={[styles.cardValueStyle]}>{item.city}</Text>
+      </View>
+      <View>
+        <Text>{item.status}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export default Card;
 export const styles = StyleSheet.create({
   cardStyle: {
-    flexDirection:'row',
+    flexDirection: "row",
     paddingVertical: 10,
-    justifyContent:'space-between',
-    paddingHorizontal:12
+    justifyContent: "space-between",
+    paddingHorizontal: 12,
   },
   cardKeyStyle: {
     color: "#B2BEB5",

@@ -1,11 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
-import SearchBar from "../../components/searchBar";
+import { scale } from "react-native-size-matters";
+
 import AddBtn from "../../components/addBtn";
+import SearchBar from "../../components/searchBar";
 import Card from "./card";
 
-const CompanyList = () => {
+const CompanyList = ({ navigation, route }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const data = [
     { name: "xyz", city: "No City Name", status: "Active" },
     { name: "12Grids", city: "Mumbai", status: "Inactive" },
@@ -27,15 +31,29 @@ const CompanyList = () => {
     { name: "NASCOM", city: "Hyderabad", status: "Active" },
     { name: "NA USA 5@#", city: "Hyderabad", status: "New" },
   ];
+
+  const getDetails = (item) => {
+    navigation.navigate("DetailScreen", { item });
+  };
+
+  const handleSearch = (text) => {
+    setSearchQuery(text)
+  };
+
+  const filteredData = data.filter((item)=> item.name.toLowerCase().includes(searchQuery.toLowerCase())||item.city.toLowerCase().includes(searchQuery.toLowerCase()))
+
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar animated={true} backgroundColor="#00477f" style="light" />
       <View style={styles.searchBarContainer}>
-        <SearchBar placeholder="Search" />
+        <SearchBar placeholder="Search" handleSearch={handleSearch}/>
       </View>
       <FlatList
-        data={data}
-        renderItem={({ item }) => <Card item={item} />}
+        data={searchQuery ? filteredData : data}
+        renderItem={({ item }) => (
+          <Card item={item} navigation={navigation} getDetails={getDetails} />
+        )}
         ItemSeparatorComponent={<View style={styles.itemSepComStyle} />}
       />
       <AddBtn />
@@ -51,7 +69,10 @@ export const styles = StyleSheet.create({
   },
   itemSepComStyle: {
     backgroundColor: "#D3D3D3",
-    height: 1,
+    height: scale(1),
   },
-  searchBarContainer: { borderBottomColor: "#D3D3D3", borderBottomWidth: 1 },
+  searchBarContainer: {  
+    borderBottomColor: "#D3D3D3", 
+    borderBottomWidth: scale(1) 
+  },
 });

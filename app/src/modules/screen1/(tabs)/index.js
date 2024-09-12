@@ -12,6 +12,7 @@ const Index = () => {
     { PIN: "PIN Code not specified." },
     { CompanyType: "Company Type not specified." },
   ];
+
   const renderItem = (ele) => {
     const [key, value] = Object.entries(ele.item)[0];
     return (
@@ -20,7 +21,7 @@ const Index = () => {
         <Text
           style={[
             styles.cardValueStyle,
-            { color: key == "AssignedTo" ? "orange" : '#303030' },
+            { color: key == "AssignedTo" ? "orange" : "#303030" },
           ]}
         >
           {value}
@@ -28,6 +29,7 @@ const Index = () => {
       </View>
     );
   };
+  
   return (
     <View>
       <FlatList

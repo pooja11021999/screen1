@@ -1,14 +1,14 @@
 import { AntDesign, Entypo, FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
-const HeaderMenu = ({ menu, refresh }) => {
+const HeaderMenu = ({ menu, refresh, onLeftBtnPress }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.leftIcons}>
+      <TouchableOpacity style={styles.leftIcons} onPress={onLeftBtnPress}> 
         <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
-      </View>
+      </TouchableOpacity>
       <View style={styles.rightIcons}>
         {refresh && (
           <FontAwesome name="rotate-right" size={scale(17)} color="#fff" />
@@ -27,6 +27,7 @@ const HeaderMenu = ({ menu, refresh }) => {
 };
 
 export default HeaderMenu;
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",

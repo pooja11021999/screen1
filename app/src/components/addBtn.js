@@ -12,6 +12,7 @@ const AddBtn = () => {
 };
 
 export default AddBtn;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "orange",
