@@ -1,4 +1,5 @@
 import {
+  AntDesign,
   Entypo,
   MaterialCommunityIcons,
   MaterialIcons,
@@ -9,6 +10,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
+import CompanyDetailsForm from "../modules/companyDetailsForm";
 import DetailsScreen from "../modules/screen1";
 import CompanyList from "../modules/screen2";
 
@@ -50,6 +52,32 @@ const StackNavigation = () => {
           component={DetailsScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="CompanyDetailsScreen"
+          component={CompanyDetailsForm}
+          options={{
+            headerShown: true,
+            headerTitleStyle: styles.companyDetailsScreenStyle,
+            headerBackImage: () => (
+              <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
+            ),
+            title: "Add Company Details",
+            headerStyle: styles.companyDetailsHeaderStyle,
+          }}
+        />
+        <Stack.Screen
+          name="EditCompanyDetailsScreen"
+          component={CompanyDetailsForm}
+          options={{
+            headerShown: true,
+            headerTitleStyle: styles.companyDetailsScreenStyle,
+            headerBackImage: () => (
+              <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
+            ),
+            title: "Edit Company Details",
+            headerStyle: styles.companyDetailsHeaderStyle,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -74,4 +102,11 @@ export const styles = StyleSheet.create({
   companyListHeaderTitle: {
     color: "#fff",
   },
+  companyDetailsScreenStyle: {
+    fontSize: 17,
+    color: "white",
+  },
+  companyDetailsHeaderStyle:{ 
+    backgroundColor: "#00477f" 
+  }
 });

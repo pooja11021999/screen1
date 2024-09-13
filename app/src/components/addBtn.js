@@ -1,13 +1,25 @@
-import { Octicons } from "@expo/vector-icons";
+import { MaterialIcons, Octicons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { scale } from "react-native-size-matters";
 
-const AddBtn = () => {
+const AddBtn = ({ edit, navigation, company }) => {
   return (
-    <View style={styles.container}>
-      <Octicons name="plus" color="#fff" size={scale(25)} />
-    </View>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate(
+          edit ? "EditCompanyDetailsScreen" : "CompanyDetailsScreen",
+          { edit: edit, company: company }
+        )
+      }
+    >
+      {edit ? (
+        <MaterialIcons name="edit" color="#fff" size={scale(25)} />
+      ) : (
+        <Octicons name="plus" color="#fff" size={scale(25)} />
+      )}
+    </TouchableOpacity>
   );
 };
 

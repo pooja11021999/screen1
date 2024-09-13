@@ -8,6 +8,7 @@ import RatingStars from "../../../components/ratingStars";
 
 const Header = ({ data, navigation, item }) => {
   const { title, indType, lastConnect, ratingPer } = data;
+  
   const onLeftBtnPress = () => {
     navigation.goBack();
   };
@@ -16,7 +17,7 @@ const Header = ({ data, navigation, item }) => {
     <View style={styles.container}>
       <HeaderMenu menu={true} refresh={true} onLeftBtnPress={onLeftBtnPress} />
       <View style={styles.contentContainer}>
-        <CustomText text={item?.name} externalStyle={styles.textStyle} />
+        <CustomText text={item?.companyName} externalStyle={styles.textStyle} />
         <RatingStars rating={ratingPer} />
 
         <View style={styles.detailsStyle}>

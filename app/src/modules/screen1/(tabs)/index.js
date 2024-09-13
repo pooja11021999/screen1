@@ -1,63 +1,60 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import { scale, verticalScale } from "react-native-size-matters";
 
-const Index = () => {
-  const studentData = [
-    { AssignedTo: "Narendra Kale" },
-    { Website: "Website url is not specified." },
-    { Address: "Address not specified." },
-    { City: "City not specified." },
-    { State: "State not specified." },
-    { Country: "Country not specified" },
-    { PIN: "PIN Code not specified." },
-    { CompanyType: "Company Type not specified." },
-  ];
+const Index = ({ company }) => {
+  const objectToArray = (obj) => {
+    return Object.entries(obj).map(([key, value]) => ({ key, value }));
+  };
 
-  const renderItem = (ele) => {
-    const [key, value] = Object.entries(ele.item)[0];
+  const companyData = objectToArray(company);
+
+  const renderItem = ({ item }) => {
     return (
       <View style={styles.cardStyle}>
-        <Text style={styles.cardKeyStyle}>{key}</Text>
+        <Text style={styles.cardKeyStyle}>{item.key}</Text>
         <Text
           style={[
             styles.cardValueStyle,
-            { color: key == "AssignedTo" ? "orange" : "#303030" },
+            { color: item.key === "assignedTo" ? "orange" : "#303030" },
           ]}
         >
-          {value}
+          {item.value}
         </Text>
       </View>
     );
   };
-  
+
   return (
-    <View>
-      <FlatList
-        data={studentData}
-        renderItem={renderItem}
-        keyExtractor={(ele, index) => index}
-        contentContainerStyle={{ paddingHorizontal: 15 }}
-        ItemSeparatorComponent={<View style={styles.itemSepStyle}></View>}
-      />
-    </View>
+    <FlatList
+      data={companyData}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.key}
+      contentContainerStyle={styles.containerStyle}
+      ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
+    />
   );
 };
 
 export default Index;
+
 const styles = StyleSheet.create({
+  containerStyle: {
+    paddingHorizontal: scale(15),
+  },
   cardStyle: {
-    paddingVertical: 10,
+    paddingVertical: verticalScale(10),
   },
   cardKeyStyle: {
     color: "#B2BEB5",
-    fontSize: 16,
+    fontSize: scale(16),
     fontWeight: "500",
   },
   cardValueStyle: {
-    fontSize: 16,
+    fontSize: scale(16),
   },
   itemSepStyle: {
     backgroundColor: "#D3D3D3",
-    height: 1.2,
+    height: scale(1.2),
   },
 });

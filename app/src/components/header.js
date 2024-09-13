@@ -6,7 +6,7 @@ import { scale } from "react-native-size-matters";
 const HeaderMenu = ({ menu, refresh, onLeftBtnPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.leftIcons} onPress={onLeftBtnPress}> 
+      <TouchableOpacity style={styles.leftIcons} onPress={onLeftBtnPress}>
         <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
       </TouchableOpacity>
       <View style={styles.rightIcons}>
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: scale(10),
   },
   rightIcons: {
     flexDirection: "row",

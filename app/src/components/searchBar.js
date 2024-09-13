@@ -1,6 +1,6 @@
 import { Octicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
 const SearchBar = ({ placeholder, handleSearch }) => {
@@ -13,9 +13,12 @@ const SearchBar = ({ placeholder, handleSearch }) => {
 
   return (
     <View style={styles.main}>
-      <TouchableOpacity style={styles.searchBtnStyle}>
-        <Octicons name="search" color="black" size={scale(18)} />
-      </TouchableOpacity>
+      <Octicons
+        name="search"
+        color="black"
+        size={scale(18)}
+        style={styles.searchBtnStyle}
+      />
       <View style={styles.textInputStyle}>
         <TextInput
           placeholder={placeholder}

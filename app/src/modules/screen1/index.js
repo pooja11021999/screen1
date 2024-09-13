@@ -23,9 +23,9 @@ export default function DetailsScreen({ navigation, route }) {
       </View>
       <View style={styles.secondBoxStyle}>
         <ContactCard />
-        <Layout />
+        <Layout company={item} />
       </View>
-      <AddBtn />
+      <AddBtn edit={true} navigation={navigation} company={item} />
     </SafeAreaView>
   );
 }
