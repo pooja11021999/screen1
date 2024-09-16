@@ -7,10 +7,11 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
 import CompanyDetailsForm from "../modules/companyDetailsForm";
+import Form from "../modules/form";
 import DetailsScreen from "../modules/screen1";
 import CompanyList from "../modules/screen2";
 
@@ -78,6 +79,28 @@ const StackNavigation = () => {
             headerStyle: styles.companyDetailsHeaderStyle,
           }}
         />
+        <Stack.Screen
+          name="Form"
+          component={Form}
+          options={{
+            headerShown: true,
+            headerTitleStyle: styles.companyDetailsScreenStyle,
+            headerBackImage: () => (
+              <AntDesign
+                name="arrowleft"
+                size={scale(21)}
+                color="#fff"
+              />
+            ),
+            title: "",
+            headerRight: () => (
+              <TouchableOpacity>
+                <Text style={styles.rightHeaderOfForm}>Save</Text>
+              </TouchableOpacity>
+            ),
+            headerStyle: styles.companyDetailsHeaderStyle,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -103,10 +126,18 @@ export const styles = StyleSheet.create({
     color: "#fff",
   },
   companyDetailsScreenStyle: {
-    fontSize: 17,
+    fontSize: scale(17),
     color: "white",
   },
-  companyDetailsHeaderStyle:{ 
-    backgroundColor: "#00477f" 
-  }
+  companyDetailsHeaderStyle: {
+    backgroundColor: "#00477f",
+  },
+  rightHeaderOfForm: {
+    marginRight: scale(15),
+    fontSize: scale(16),
+    color: "#fff",
+  },
+  leftHeaderOfForm: {
+    marginLeft: scale(15),
+  },
 });

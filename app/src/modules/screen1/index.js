@@ -1,5 +1,7 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, View } from "react-native";
+import { scale } from "react-native-size-matters";
 
 import AddBtn from "../../components/addBtn";
 import Layout from "./_layout";
@@ -8,7 +10,14 @@ import Header from "./headerComponent";
 
 export default function DetailsScreen({ navigation, route }) {
   const { item } = route.params;
- 
+
+  const handleIconPress = () => {
+    navigation.navigate("EditCompanyDetailsScreen", {
+      edit: true,
+      company: item,
+    });
+  };
+  
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar animated={true} backgroundColor="#00477f" style="light" />
@@ -19,7 +28,12 @@ export default function DetailsScreen({ navigation, route }) {
         <ContactCard />
         <Layout company={item} />
       </View>
-      <AddBtn edit={true} navigation={navigation} company={item} />
+      <AddBtn
+        onIconPress={handleIconPress}
+        renderIcon={() => (
+          <MaterialIcons name="edit" color="#fff" size={scale(25)} />
+        )}
+      />
     </SafeAreaView>
   );
 }

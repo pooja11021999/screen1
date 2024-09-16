@@ -1,3 +1,4 @@
+import { Octicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
@@ -19,6 +20,10 @@ const CompanyList = ({ navigation, companies }) => {
     setSearchQuery(text);
   };
 
+  const handleIconPress = () => {
+    navigation.navigate("Form", {});
+  };
+
   const filteredData = companies.filter(
     (item) =>
       item.companyName?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
@@ -38,7 +43,12 @@ const CompanyList = ({ navigation, companies }) => {
           <Card item={item} navigation={navigation} getDetails={getDetails} />
         )}
       />
-      <AddBtn navigation={navigation} />
+      <AddBtn
+        onIconPress={handleIconPress}
+        renderIcon={() => (
+          <Octicons name="plus" color="#fff" size={scale(25)} />
+        )}
+      />
     </SafeAreaView>
   );
 };
