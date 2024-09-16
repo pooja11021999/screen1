@@ -36,7 +36,7 @@ export default SearchBar;
 export const styles = StyleSheet.create({
   main: {
     flexDirection: "row",
-    paddingVertical: verticalScale(10),
+    paddingVertical: verticalScale(5),
     paddingHorizontal: scale(15),
     alignItems: "center",
   },

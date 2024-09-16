@@ -19,7 +19,7 @@ const Index = ({ company }) => {
             { color: item.key === "assignedTo" ? "orange" : "#303030" },
           ]}
         >
-          {item.value}
+          {item?.value || '-'}
         </Text>
       </View>
     );

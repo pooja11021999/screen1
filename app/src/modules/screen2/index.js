@@ -8,7 +8,7 @@ import AddBtn from "../../components/addBtn";
 import SearchBar from "../../components/searchBar";
 import Card from "./card";
 
-const CompanyList = ({ navigation, route, companies }) => {
+const CompanyList = ({ navigation, companies }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const getDetails = (item) => {

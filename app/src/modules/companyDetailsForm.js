@@ -1,5 +1,5 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -12,8 +12,9 @@ import {
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { connect, useDispatch } from "react-redux";
 
-import CustomFormField from "../../../assets/commonElements/customFormField";
+import LabelInput from "../../../assets/commonElements/labelInput";
 import CustomText from "../../../assets/commonElements/text";
+import DateTimePicker from "../../../assets/dateUtils/dateTimePicker";
 import {
   addCompany,
   updateCompany,
@@ -21,46 +22,42 @@ import {
 
 const CompanyDetailsForm = ({ route, location, navigation }) => {
   const dispatch = useDispatch();
-  
+
   const { edit, company } = route.params;
 
-  const {
-    control,
-    watch,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm();
+  const [formData, setFormData] = useState({
+    companyName: "",
+    email: "",
+    industryType: "",
+    assignedTo: "",
+    website: "",
+    address: "",
+    country: "",
+    state: "",
+    city: "",
+    pinCode: "",
+    companyType: "",
+    lastContacted: "",
+  });
 
+  const [errors, setErrors] = useState({});
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
-
-  const enteredData = watch();
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 
   useEffect(() => {
     const countryList = location.map((loc) => loc.country);
     setCountries(countryList);
 
     if (edit && company) {
-      setValue("companyName", company.companyName);
-      setValue("email", company.email);
-      setValue("industryType", company.industryType);
-      setValue("assignedTo", company.assignedTo);
-      setValue("website", company.website);
-      setValue("address", company.address);
-      setValue("country", company.country);
-      setValue("state", company.state);
-      setValue("city", company.city);
-      setValue("pinCode", company.pinCode);
-      setValue("companyType", company.companyType);
-      setValue("lastContacted", company.lastContacted);
+      setFormData({ ...company });
     }
-  }, [location, edit, company, setValue]);
+  }, [location, edit, company]);
 
   useEffect(() => {
     const selectedCountry = location.find(
-      (loc) => loc.country === enteredData.country
+      (loc) => loc.country === formData.country
     );
 
     if (selectedCountry) {
@@ -70,29 +67,56 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
       setStates([]);
       setCities([]);
     }
-  }, [enteredData.country]);
+  }, [formData.country]);
 
   useEffect(() => {
     const selectedCountry = location.find(
-      (loc) => loc.country === enteredData.country
+      (loc) => loc.country === formData.country
     );
     if (selectedCountry) {
       const selectedState = selectedCountry.states.find(
-        (state) => state.state === enteredData.state
+        (state) => state.state === formData.state
       );
       setCities(selectedState ? selectedState.cities : []);
     }
-  }, [enteredData.state, enteredData.country]);
+  }, [formData.state, formData.country]);
 
-  const onSubmit = (data) => {
+  const handleChange = (name, value) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const setLastContactedDate = (date) => {
+    setFormData((prev) => ({
+      ...prev,
+      ["lastContacted"]: moment(date).format("DD-MM-YYYY").toString(),
+    }));
+    setDatePickerVisible(false);
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.companyName)
+      newErrors.companyName = "Company Name is required";
+    if (!formData.email || !/^[^@]+@[^@]+\.[^@]+$/.test(formData.email))
+      newErrors.email = "Valid email is required";
+    if (!formData.assignedTo) newErrors.assignedTo = "Assigned To is required";
+    if (!formData.address) newErrors.address = "Address is required";
+    if (!formData.country) newErrors.country = "Country is required";
+    if (!formData.state) newErrors.state = "State is required";
+    if (!formData.city) newErrors.city = "City is required";
+    if (!formData.pinCode) newErrors.city = "PIN Code is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const onSubmit = () => {
+    if (!validateForm()) return;
+
     if (edit) {
-      dispatch(updateCompany({ id: company.id, ...data }));
-    } else {
-      dispatch(addCompany({ id: Date.now(), ...data }));
-    }
-    if (edit) {
+      dispatch(updateCompany({ id: company.id, ...formData }));
       navigation.navigate("Company", {});
     } else {
+      dispatch(addCompany({ id: Date.now(), ...formData }));
       navigation.goBack();
     }
   };
@@ -108,78 +132,105 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
           keyboardShouldPersistTaps="handled"
         >
           {[
-            { label: "Company Name", fieldname: "companyName", required: true },
+            {
+              label: "Company Name",
+              fieldname: "companyName",
+              placeholder: "Enter Company Name",
+            },
             {
               label: "Email",
               fieldname: "email",
-              pattern: /^[^@]+@[^@]+\.[^@]+$/,
-              patternMsg: "Invalid email address",
-              required: true,
+              placeholder: "Enter Email",
             },
-            { label: "Industry Type", fieldname: "industryType" },
-            { label: "Assigned To", fieldname: "assignedTo", required: true },
-            { label: "Website", fieldname: "website" },
-            { label: "Address", fieldname: "address", required: true },
+            {
+              label: "Industry Type",
+              fieldname: "industryType",
+              placeholder: "Enter Industry Type",
+            },
+            {
+              label: "Assigned To",
+              fieldname: "assignedTo",
+              required: true,
+              placeholder: "Enter Assigned To",
+            },
+            {
+              label: "Website",
+              fieldname: "website",
+              placeholder: "Enter Website",
+            },
+            {
+              label: "Address",
+              fieldname: "address",
+              placeholder: "Enter Address",
+            },
             {
               label: "Country",
               fieldname: "country",
               isSelect: true,
               options: countries,
-              required: true,
+              placeholder: "Select Country",
             },
             {
               label: "State",
               fieldname: "state",
               isSelect: true,
               options: states,
-              required: true,
+              placeholder: "Select State",
             },
             {
               label: "City",
               fieldname: "city",
               isSelect: true,
               options: cities,
-              required: true,
+              placeholder: "Select City",
             },
-            { label: "PIN Code", fieldname: "pinCode" },
-            { label: "Company Type", fieldname: "companyType" },
-            { label: "Last Contacted On", fieldname: "lastContacted" },
+            {
+              label: "PIN Code",
+              fieldname: "pinCode",
+              placeholder: "Enter PIN Code",
+            },
+            {
+              label: "Company Type",
+              fieldname: "companyType",
+              placeholder: "Enter Company Type",
+            },
+            {
+              label: "Last Contacted On",
+              fieldname: "lastContacted",
+              placeholder: "Select Last Contacted Date",
+              isDate: true,
+            },
           ].map(
-            ({
-              label,
-              fieldname,
-              required,
-              pattern,
-              patternMsg,
-              isSelect,
-              options,
-            }) => (
-              <CustomFormField
-                key={fieldname}
+            ({ label, fieldname, isSelect, options, placeholder, isDate }) => (
+              <LabelInput
                 label={label}
-                placeholder={`Enter ${label}`}
                 fieldname={fieldname}
-                control={control}
-                errors={errors}
-                requiredMsg={required ? `${label} is required` : ""}
-                pattern={pattern}
-                patternMsg={patternMsg}
                 isSelect={isSelect}
                 options={options}
-                selectedValue={edit ? company[fieldname] : ""}
+                placeholder={placeholder}
+                formData={formData}
+                handleChange={handleChange}
+                errors={errors}
+                key={fieldname}
+                isDate={isDate}
+                setDatePickerVisible={setDatePickerVisible}
               />
             )
           )}
         </ScrollView>
 
         <View style={styles.btnContainerStyle}>
-          <TouchableOpacity
-            onPress={handleSubmit(onSubmit)}
-            style={styles.btnStyle}
-          >
+          <TouchableOpacity onPress={onSubmit} style={styles.btnStyle}>
             <CustomText text={`${edit ? "Edit" : "Add"} Company`} />
           </TouchableOpacity>
         </View>
+        <DateTimePicker
+          isDatePickerVisible={isDatePickerVisible}
+          handleConfirm={setLastContactedDate}
+          handleCancel={() => setDatePickerVisible(false)}
+          maximumDate={null}
+          minimumDate={new Date()}
+        />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

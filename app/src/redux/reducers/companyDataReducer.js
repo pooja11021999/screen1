@@ -17,6 +17,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2023-09-01",
       status: "Active",
+      ratingPer: 4,
     },
     {
       id: 101,
@@ -33,6 +34,7 @@ const initialCompanyState = {
       companyType: "Public",
       lastContacted: "2023-08-22",
       status: "Active",
+      ratingPer: 5,
     },
     {
       id: 102,
@@ -49,6 +51,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2023-07-15",
       status: "Active",
+      ratingPer: 3,
     },
     {
       id: 103,
@@ -65,6 +68,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2023-06-11",
       status: "Active",
+      ratingPer: 4,
     },
     {
       id: 104,
@@ -81,6 +85,7 @@ const initialCompanyState = {
       companyType: "Public",
       lastContacted: "2023-05-29",
       status: "Active",
+      ratingPer: 4,
     },
     {
       id: 105,
@@ -97,6 +102,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2023-05-15",
       status: "Active",
+      ratingPer: 5,
     },
     {
       id: 106,
@@ -113,6 +119,7 @@ const initialCompanyState = {
       companyType: "Public",
       lastContacted: "2023-04-22",
       status: "Active",
+      ratingPer: 3,
     },
     {
       id: 107,
@@ -129,6 +136,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2023-04-05",
       status: "Active",
+      ratingPer: 5,
     },
     {
       id: 108,
@@ -161,6 +169,7 @@ const initialCompanyState = {
       companyType: "Public",
       lastContacted: "2023-02-28",
       status: "Active",
+      ratingPer: 5,
     },
     {
       id: 110,
@@ -177,6 +186,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2023-01-30",
       status: "Inactive",
+      ratingPer: 3,
     },
     {
       id: 111,
@@ -193,6 +203,7 @@ const initialCompanyState = {
       companyType: "Public",
       lastContacted: "2022-12-19",
       status: "Inactive",
+      ratingPer: 3,
     },
     {
       id: 112,
@@ -209,6 +220,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2022-12-05",
       status: "Active",
+      ratingPer: 5,
     },
     {
       id: 113,
@@ -225,6 +237,7 @@ const initialCompanyState = {
       companyType: "Public",
       lastContacted: "2022-11-18",
       status: "Inactive",
+      ratingPer: 5,
     },
     {
       id: 114,
@@ -241,6 +254,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2022-10-25",
       status: "Active",
+      ratingPer: 5,
     },
     {
       id: 115,
@@ -257,6 +271,7 @@ const initialCompanyState = {
       companyType: "Public",
       lastContacted: "2022-09-20",
       status: "Inactive",
+      ratingPer: 5,
     },
     {
       id: 116,
@@ -273,6 +288,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2022-08-12",
       status: "Active",
+      ratingPer: 4,
     },
     {
       id: 117,
@@ -289,6 +305,7 @@ const initialCompanyState = {
       companyType: "Private",
       lastContacted: "2022-07-18",
       status: "New",
+      ratingPer: 5,
     },
   ],
 };

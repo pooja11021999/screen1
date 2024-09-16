@@ -6,8 +6,8 @@ import CustomText from "../../../../../assets/commonElements/text";
 import HeaderMenu from "../../../components/header";
 import RatingStars from "../../../components/ratingStars";
 
-const Header = ({ data, navigation, item }) => {
-  const { title, indType, lastConnect, ratingPer } = data;
+const Header = ({ navigation, item }) => {
+  const { companyName, industryType, lastContacted, ratingPer } = item;
   
   const onLeftBtnPress = () => {
     navigation.goBack();
@@ -17,15 +17,15 @@ const Header = ({ data, navigation, item }) => {
     <View style={styles.container}>
       <HeaderMenu menu={true} refresh={true} onLeftBtnPress={onLeftBtnPress} />
       <View style={styles.contentContainer}>
-        <CustomText text={item?.companyName} externalStyle={styles.textStyle} />
+        <CustomText text={companyName} externalStyle={styles.textStyle} />
         <RatingStars rating={ratingPer} />
 
         <View style={styles.detailsStyle}>
-          <CustomText text={indType} />
+          <CustomText text={industryType} />
 
           <View style={styles.lastConnectStyle}>
             <CustomText text="Last contacted on: " />
-            <CustomText text={lastConnect} />
+            <CustomText text={lastContacted} />
           </View>
         </View>
       </View>
