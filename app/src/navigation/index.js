@@ -48,37 +48,51 @@ const StackNavigation = () => {
             ),
           }}
         />
+
         <Stack.Screen
           name="DetailScreen"
           component={DetailsScreen}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen
           name="CompanyDetailsScreen"
           component={CompanyDetailsForm}
           options={{
-            headerShown: true,
+            headerShown: false,
             headerTitleStyle: styles.companyDetailsScreenStyle,
             headerBackImage: () => (
               <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
             ),
-            title: "Add Company Details",
+            title: "",
+            headerRight: () => (
+              <TouchableOpacity>
+                <Text style={styles.rightHeaderOfForm}>Save</Text>
+              </TouchableOpacity>
+            ),
             headerStyle: styles.companyDetailsHeaderStyle,
           }}
         />
+
         <Stack.Screen
           name="EditCompanyDetailsScreen"
           component={CompanyDetailsForm}
           options={{
-            headerShown: true,
+            headerShown: false,
             headerTitleStyle: styles.companyDetailsScreenStyle,
             headerBackImage: () => (
               <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
             ),
-            title: "Edit Company Details",
+            headerRight: () => (
+              <TouchableOpacity>
+                <Text style={styles.rightHeaderOfForm}>Save</Text>
+              </TouchableOpacity>
+            ),
+            title: "",
             headerStyle: styles.companyDetailsHeaderStyle,
           }}
         />
+
         <Stack.Screen
           name="Form"
           component={Form}
@@ -101,6 +115,7 @@ const StackNavigation = () => {
             headerStyle: styles.companyDetailsHeaderStyle,
           }}
         />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

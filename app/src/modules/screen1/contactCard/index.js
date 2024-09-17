@@ -5,7 +5,7 @@ import { moderateScale, scale } from "react-native-size-matters";
 
 import CustomText from "../../../../../assets/commonElements/text";
 
-const ContactCard = () => {
+const ContactCard = ({isMenuOpened}) => {
   const [cardHeight, setCardHeight] = useState(0);
   const viewRef = useRef(null);
 
@@ -18,7 +18,13 @@ const ContactCard = () => {
     <View
       onLayout={handleEvent}
       ref={viewRef}
-      style={[styles.container, { top: -(cardHeight / 3) }]}
+      style={[
+        styles.container,
+        {
+          top: -(cardHeight / 2),
+          elevation: isMenuOpened ? 0 : moderateScale(4),
+        },
+      ]}
     >
       <View style={styles.textContainer}>
         <CustomText text={"Active"} externalStyle={styles.textStyle} />
@@ -49,11 +55,11 @@ export default ContactCard;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    elevation: moderateScale(4),
     padding: scale(15),
     marginHorizontal: scale(26),
     borderRadius: scale(12),
     flexDirection: "row",
+    alignItems: "center",
   },
   iconContainer: {
     flex: 1,
@@ -80,6 +86,5 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "orange",
-    marginBottom: scale(10),
   },
 });

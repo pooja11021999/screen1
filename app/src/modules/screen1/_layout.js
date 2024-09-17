@@ -6,7 +6,7 @@ import First from "./(tabs)/first";
 import Second from "./(tabs)/second";
 import Third from "./(tabs)/third";
 
-export default function Layout({ company }) {
+export default function Layout({ company, isMenuOpened }) {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
@@ -26,6 +26,7 @@ export default function Layout({ company }) {
         tabBarItemStyle: {
           width: "auto",
         },
+        tabBarStyle: isMenuOpened ? { elevation: 0 } : {},
       }}
     >
       <Tab.Screen name="Basic Information">

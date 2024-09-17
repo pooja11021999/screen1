@@ -1,20 +1,23 @@
+import { Ionicons } from "@expo/vector-icons";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
+  FlatList,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { connect, useDispatch } from "react-redux";
 
-import LabelInput from "../../../assets/commonElements/labelInput";
+import CustomField from "../../../assets/commonElements/customField";
 import CustomText from "../../../assets/commonElements/text";
 import DateTimePicker from "../../../assets/dateUtils/dateTimePicker";
+import AddBtn from "../components/addBtn";
+import CustomHeader from "../components/customHeader";
 import {
   addCompany,
   updateCompany,
@@ -25,6 +28,77 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
 
   const { edit, company } = route.params;
 
+  const data = [
+    {
+      label: "Company Name",
+      fieldname: "companyName",
+      placeholder: "Enter Company Name",
+      required: true,
+    },
+    {
+      label: "Email",
+      fieldname: "email",
+      placeholder: "Enter Email",
+    },
+    {
+      label: "Industry Type",
+      fieldname: "industryType",
+      placeholder: "Enter Industry Type",
+    },
+    {
+      label: "Assigned To",
+      fieldname: "assignedTo",
+      placeholder: "Enter Assigned To",
+    },
+    {
+      label: "Website",
+      fieldname: "website",
+      placeholder: "Enter Website",
+    },
+    {
+      label: "Address Line",
+      fieldname: "address",
+      placeholder: "Enter Address",
+      location: true,
+    },
+    {
+      label: "Country",
+      fieldname: "country",
+      isSelect: true,
+      options: countries,
+      placeholder: "Select Country",
+    },
+    {
+      label: "State",
+      fieldname: "state",
+      isSelect: true,
+      options: states,
+      placeholder: "Select State",
+    },
+    {
+      label: "City",
+      fieldname: "city",
+      isSelect: true,
+      options: cities,
+      placeholder: "Select City",
+    },
+    {
+      label: "PIN Code",
+      fieldname: "pinCode",
+      placeholder: "Enter PIN Code",
+    },
+    {
+      label: "Company Type",
+      fieldname: "companyType",
+      placeholder: "Enter Company Type",
+    },
+    {
+      label: "Last Contacted On",
+      fieldname: "lastContacted",
+      placeholder: "Select Last Contacted Date",
+      isDate: true,
+    },
+  ];
   const [formData, setFormData] = useState({
     companyName: "",
     email: "",
@@ -104,7 +178,7 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
     if (!formData.country) newErrors.country = "Country is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.city) newErrors.city = "City is required";
-    if (!formData.pinCode) newErrors.city = "PIN Code is required";
+    if (!formData.pinCode) newErrors.pinCode = "PIN Code is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -121,109 +195,55 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
     }
   };
 
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <SafeAreaView style={styles.container}>
-        <ScrollView
-          style={styles.formStyle}
-          keyboardShouldPersistTaps="handled"
-        >
-          {[
-            {
-              label: "Company Name",
-              fieldname: "companyName",
-              placeholder: "Enter Company Name",
-            },
-            {
-              label: "Email",
-              fieldname: "email",
-              placeholder: "Enter Email",
-            },
-            {
-              label: "Industry Type",
-              fieldname: "industryType",
-              placeholder: "Enter Industry Type",
-            },
-            {
-              label: "Assigned To",
-              fieldname: "assignedTo",
-              required: true,
-              placeholder: "Enter Assigned To",
-            },
-            {
-              label: "Website",
-              fieldname: "website",
-              placeholder: "Enter Website",
-            },
-            {
-              label: "Address",
-              fieldname: "address",
-              placeholder: "Enter Address",
-            },
-            {
-              label: "Country",
-              fieldname: "country",
-              isSelect: true,
-              options: countries,
-              placeholder: "Select Country",
-            },
-            {
-              label: "State",
-              fieldname: "state",
-              isSelect: true,
-              options: states,
-              placeholder: "Select State",
-            },
-            {
-              label: "City",
-              fieldname: "city",
-              isSelect: true,
-              options: cities,
-              placeholder: "Select City",
-            },
-            {
-              label: "PIN Code",
-              fieldname: "pinCode",
-              placeholder: "Enter PIN Code",
-            },
-            {
-              label: "Company Type",
-              fieldname: "companyType",
-              placeholder: "Enter Company Type",
-            },
-            {
-              label: "Last Contacted On",
-              fieldname: "lastContacted",
-              placeholder: "Select Last Contacted Date",
-              isDate: true,
-            },
-          ].map(
-            ({ label, fieldname, isSelect, options, placeholder, isDate }) => (
-              <LabelInput
-                label={label}
-                fieldname={fieldname}
-                isSelect={isSelect}
-                options={options}
-                placeholder={placeholder}
-                formData={formData}
-                handleChange={handleChange}
-                errors={errors}
-                key={fieldname}
-                isDate={isDate}
-                setDatePickerVisible={setDatePickerVisible}
-              />
-            )
-          )}
-        </ScrollView>
+  const handleIconPress = () => {
+    return <View></View>;
+  };
 
-        <View style={styles.btnContainerStyle}>
-          <TouchableOpacity onPress={onSubmit} style={styles.btnStyle}>
-            <CustomText text={`${edit ? "Edit" : "Add"} Company`} />
-          </TouchableOpacity>
+  const renderSaveBtn = () => {
+    return (
+      <TouchableOpacity onPress={onSubmit}>
+        <CustomText text="Save" />
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "default"}
+        style={styles.container}
+      >
+        <CustomHeader
+          navigation={navigation}
+          customRightContent={renderSaveBtn}
+          customLeftOnPress={() => navigation.goBack()}
+        />
+
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <CustomField
+              item={item}
+              formData={formData}
+              setDatePickerVisible={setDatePickerVisible}
+              handleChange={handleChange}
+              errors={errors}
+            />
+          )}
+          keyExtractor={(item) => item.fieldname}
+          keyboardShouldPersistTaps="handled"
+          style={styles.formStyle}
+        />
+
+        <View>
+          <AddBtn
+            onIconPress={handleIconPress}
+            renderIcon={() => (
+              <Ionicons name="attach" size={scale(27)} color="#fff" />
+            )}
+          />
         </View>
+    
         <DateTimePicker
           isDatePickerVisible={isDatePickerVisible}
           handleConfirm={setLastContactedDate}
@@ -231,8 +251,8 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
           maximumDate={null}
           minimumDate={new Date()}
         />
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -246,10 +266,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   formStyle: {
-    marginVertical: verticalScale(10),
     paddingHorizontal: scale(18),
     backgroundColor: "#fff",
-    flexGrow: 1,
   },
   btnContainerStyle: {
     backgroundColor: "#fff",

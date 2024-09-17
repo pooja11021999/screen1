@@ -1,11 +1,12 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { scale } from "react-native-size-matters";
 
-const AddBtn = ({ renderIcon, onIconPress }) => {
+const AddBtn = ({ renderIcon, onIconPress, label }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => onIconPress()}>
       {renderIcon()}
+      {label && <Text style={styles.label}>{label}</Text>}
     </TouchableOpacity>
   );
 };
@@ -23,5 +24,6 @@ const styles = StyleSheet.create({
     width: scale(50),
     height: scale(50),
     borderRadius: scale(25),
+    marginTop: scale(20)
   },
 });

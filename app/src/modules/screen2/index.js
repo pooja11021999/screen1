@@ -21,7 +21,7 @@ const CompanyList = ({ navigation, companies }) => {
   };
 
   const handleIconPress = () => {
-    navigation.navigate("Form", {});
+    navigation.navigate("CompanyDetailsScreen", {});
   };
 
   const filteredData = companies.filter(
