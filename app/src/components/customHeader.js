@@ -1,6 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
 const CustomHeader = ({
@@ -11,7 +11,7 @@ const CustomHeader = ({
   navigation,
 }) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.content}>
         <View
           style={styles.leftContentContainer}
@@ -28,7 +28,7 @@ const CustomHeader = ({
           {customRightContent()}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -37,11 +37,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#00477f",
   },
   content: {
-    height: scale(85),
+    padding: scale(13),
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",
-    padding: scale(20),
   },
   leftContentContainer: {
     flex: 1,

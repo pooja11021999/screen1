@@ -10,8 +10,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import CompanyDetailsForm from "../modules/companyDetailsForm";
-import Form from "../modules/form";
+import companyDetailsForm from "../modules/form/companyDetailsForm";
 import DetailsScreen from "../modules/screen1";
 import CompanyList from "../modules/screen2";
 
@@ -57,7 +56,7 @@ const StackNavigation = () => {
 
         <Stack.Screen
           name="CompanyDetailsScreen"
-          component={CompanyDetailsForm}
+          component={companyDetailsForm}
           options={{
             headerShown: false,
             headerTitleStyle: styles.companyDetailsScreenStyle,
@@ -76,7 +75,7 @@ const StackNavigation = () => {
 
         <Stack.Screen
           name="EditCompanyDetailsScreen"
-          component={CompanyDetailsForm}
+          component={companyDetailsForm}
           options={{
             headerShown: false,
             headerTitleStyle: styles.companyDetailsScreenStyle,
@@ -93,28 +92,7 @@ const StackNavigation = () => {
           }}
         />
 
-        <Stack.Screen
-          name="Form"
-          component={Form}
-          options={{
-            headerShown: true,
-            headerTitleStyle: styles.companyDetailsScreenStyle,
-            headerBackImage: () => (
-              <AntDesign
-                name="arrowleft"
-                size={scale(21)}
-                color="#fff"
-              />
-            ),
-            title: "",
-            headerRight: () => (
-              <TouchableOpacity>
-                <Text style={styles.rightHeaderOfForm}>Save</Text>
-              </TouchableOpacity>
-            ),
-            headerStyle: styles.companyDetailsHeaderStyle,
-          }}
-        />
+       
         
       </Stack.Navigator>
     </NavigationContainer>

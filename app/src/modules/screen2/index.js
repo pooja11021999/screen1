@@ -1,7 +1,6 @@
 import { Octicons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
 import { connect } from "react-redux";
 
@@ -31,8 +30,7 @@ const CompanyList = ({ navigation, companies }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar animated={true} backgroundColor="#00477f" style="light" />
+    <>
       <View style={styles.searchBarContainer}>
         <SearchBar placeholder="Search" handleSearch={handleSearch} />
       </View>
@@ -49,7 +47,7 @@ const CompanyList = ({ navigation, companies }) => {
           <Octicons name="plus" color="#fff" size={scale(25)} />
         )}
       />
-    </SafeAreaView>
+    </>
   );
 };
 
