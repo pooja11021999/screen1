@@ -14,12 +14,14 @@ import { connect, useDispatch } from "react-redux";
 
 import CustomField from "../../../../assets/commonElements/customField";
 import CustomText from "../../../../assets/commonElements/text";
-import Data from '../../../../assets/constantItems';
-import DateTimePicker from '../../../../assets/dateUtils/dateTimePicker';
+import Data from "../../../../assets/constantItems";
+import DateTimePicker from "../../../../assets/dateUtils/dateTimePicker";
 import AddBtn from "../../components/addBtn";
 import CustomHeader from "../../components/customHeader";
-import { addCompany, updateCompany } from "../../redux/reducers/companyDataReducer";
-
+import {
+  addCompany,
+  updateCompany,
+} from "../../redux/reducers/companyDataReducer";
 
 const CompanyDetailsForm = ({ route, location, navigation }) => {
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
   const [cities, setCities] = useState([]);
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 
-  const data = Data.FieldData
+  const data = Data.FieldData;
 
   useEffect(() => {
     const countryList = location.map((loc) => loc.country);
@@ -133,15 +135,15 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
     );
   };
 
-  const getOptions = (item) =>{
-    if(item.fieldname=='country'){
-      return countries
-    }else if(item.fieldname=='state'){
-      return states
-    }else if(item.fieldname=='city'){
-      return cities
+  const getOptions = (item) => {
+    if (item.fieldname == "country") {
+      return countries;
+    } else if (item.fieldname == "state") {
+      return states;
+    } else if (item.fieldname == "city") {
+      return cities;
     }
-  }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -167,8 +169,10 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
           />
         )}
         keyExtractor={(item) => item.fieldname}
-        keyboardShouldPersistTaps="handled"
+        keyboardShouldPersistTaps="always"
         style={styles.formStyle}
+        ItemSeparatorComponent={<View style={styles.itemSepComStyle} />}
+        contentContainerStyle={styles.listContainer}
       />
 
       <View>
@@ -218,6 +222,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: scale(8),
   },
+  itemSepComStyle: {
+    height: scale(1),
+    backgroundColor: "#ccc",
+    marginBottom: scale(20),
+  },
+  listContainer: { paddingVertical: scale(15) },
 });
 
 export default connect(mapStateToProps)(CompanyDetailsForm);

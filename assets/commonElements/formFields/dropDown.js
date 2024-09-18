@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Select } from "native-base";
 import React from "react";
 import { StyleSheet } from "react-native";
@@ -10,9 +11,15 @@ const DropDown = ({ handleChange, item, formData, options }) => {
       onValueChange={(value) => handleChange(item.fieldname, value)}
       style={[styles.textStyle, styles.selectStyle]}
       placeholder={item.placeholder}
+      placeholderTextColor='#ccc'
       width={scale(300)}
       borderWidth={scale(0)}
-      dropdownIcon={<></>}
+      height={scale(36)}
+      dropdownIcon={<Ionicons
+        name="chevron-down-outline"
+        color="black"
+        size={scale(20)}
+      />}
     >
       {options?.map((option) => (
         <Select.Item
@@ -34,6 +41,7 @@ const styles = StyleSheet.create({
     fontSize: scale(16),
   },
   selectStyle: {
-    paddingLeft: scale(5),
+    paddingLeft: scale(9),
+    paddingVertical: scale(0),
   },
 });

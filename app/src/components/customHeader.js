@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00477f",
   },
   content: {
-    padding: scale(13),
+    padding: scale(18),
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "space-between",

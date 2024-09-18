@@ -203,5 +203,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     elevation: moderateScale(2),
     padding: scale(3),
+    paddingHorizontal: scale(6),
+    borderRadius: scale(5),
   },
 });
