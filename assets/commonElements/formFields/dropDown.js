@@ -11,15 +11,13 @@ const DropDown = ({ handleChange, item, formData, options }) => {
       onValueChange={(value) => handleChange(item.fieldname, value)}
       style={[styles.textStyle, styles.selectStyle]}
       placeholder={item.placeholder}
-      placeholderTextColor='#ccc'
+      placeholderTextColor="#ccc"
       width={scale(300)}
       borderWidth={scale(0)}
       height={scale(36)}
-      dropdownIcon={<Ionicons
-        name="chevron-down-outline"
-        color="black"
-        size={scale(20)}
-      />}
+      dropdownIcon={
+        <Ionicons name="chevron-down-outline" color="black" size={scale(20)} />
+      }
     >
       {options?.map((option) => (
         <Select.Item
@@ -41,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: scale(16),
   },
   selectStyle: {
-    paddingLeft: scale(9),
+    paddingLeft: scale(2),
     paddingVertical: scale(0),
   },
 });

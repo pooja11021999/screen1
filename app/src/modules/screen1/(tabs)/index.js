@@ -9,17 +9,32 @@ const Index = ({ company }) => {
 
   const companyData = objectToArray(company);
 
+  const getLabelFromKey = (key) => {
+    return key
+      .split("") 
+      .map((char, index) => {
+        if (index === 0) {
+          return char.toUpperCase(); 
+        } else if (char === char.toUpperCase()) {
+          return " " + char; 
+        }
+        return char;
+      })
+      .join(""); 
+  };
+  
+
   const renderItem = ({ item }) => {
     return (
       <View style={styles.cardStyle}>
-        <Text style={styles.cardKeyStyle}>{item.key}</Text>
+        <Text style={styles.cardKeyStyle}>{getLabelFromKey(item.key)}</Text>
         <Text
           style={[
             styles.cardValueStyle,
             { color: item.key === "assignedTo" ? "orange" : "#303030" },
           ]}
         >
-          {item?.value || '-'}
+          {item?.value || "-"}
         </Text>
       </View>
     );

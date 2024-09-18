@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import { scale } from "react-native-size-matters";
 
 const InputField = ({ item, formData, handleChange }) => {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     fontSize: scale(16),
   },
   inputStyle: {
-    paddingLeft: scale(10),
+    paddingLeft: scale(2),
     paddingVertical: scale(4),
   },
 });

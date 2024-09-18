@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     textInputContainer: {
       flexDirection: "row",
       alignItems: "center",
-      paddingLeft: scale(10),
+      paddingLeft: scale(2),
       paddingRight: scale(14),
       height: scale(40),
     },

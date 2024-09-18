@@ -39,15 +39,14 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: scale(15),
-    paddingVertical: verticalScale(6),
+    paddingHorizontal: scale(15)
   },
   detailsStyle: {
-    paddingTop: verticalScale(10),
-    marginTop: verticalScale(20),
+    paddingTop: verticalScale(0),
+    marginVertical: verticalScale(20),
   },
   contentContainer: {
-    paddingTop: verticalScale(15),
+    paddingTop: verticalScale(20),
   },
   textStyle: {
     fontSize: scale(20),

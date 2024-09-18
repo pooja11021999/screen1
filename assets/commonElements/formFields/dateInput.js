@@ -23,16 +23,13 @@ const DateInput = ({ formData, item, setDatePickerVisible }) => {
 export default DateInput;
 
 const styles = StyleSheet.create({
-    dateContainerStyle: {
-        height: scale(36),
-        justifyContent: "center",
-        paddingHorizontal: scale(6),
-        
-      },
-      dateContainerPHStyle: {
-        color: "#ccc",
-        paddingLeft: scale(4),
-        fontSize: scale(16),
-      },
-
-})
+  dateContainerStyle: {
+    height: scale(36),
+    justifyContent: "center",
+  },
+  dateContainerPHStyle: {
+    color: "#ccc",
+    paddingLeft: scale(2),
+    fontSize: scale(16),
+  },
+});

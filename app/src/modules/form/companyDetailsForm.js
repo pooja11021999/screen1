@@ -171,7 +171,6 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
         keyExtractor={(item) => item.fieldname}
         keyboardShouldPersistTaps="always"
         style={styles.formStyle}
-        ItemSeparatorComponent={<View style={styles.itemSepComStyle} />}
         contentContainerStyle={styles.listContainer}
       />
 
@@ -222,12 +221,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: scale(8),
   },
-  itemSepComStyle: {
-    height: scale(1),
-    backgroundColor: "#ccc",
-    marginBottom: scale(20),
-  },
-  listContainer: { paddingVertical: scale(15) },
+  listContainer: { paddingVertical: scale(10) },
 });
 
 export default connect(mapStateToProps)(CompanyDetailsForm);

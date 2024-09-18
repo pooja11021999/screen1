@@ -7,6 +7,7 @@ import DropDown from "./formFields/dropDown";
 import GooglePlacesInput from "./formFields/googlePlacesInput";
 import InputField from "./formFields/inputField";
 import CustomText from "./text";
+
 const CustomField = ({
   item,
   formData,
@@ -60,8 +61,8 @@ const CustomField = ({
         <View style={styles.leftLabelContent}>
           <CustomText text={item.label} externalStyle={styles.textStyle} />
           <CustomText
-            text={item.required && "*"}
-            externalStyle={styles.textStyle}
+            text={item.required ? "*" : ""}
+            externalStyle={[styles.textStyle, styles.requiredStyle]}
           />
         </View>
       </View>
@@ -70,6 +71,7 @@ const CustomField = ({
         <View style={styles.leftValueContent}>{renderField()}</View>
       </View>
 
+      <View style={styles.itemSepComStyle} />
       {errors[item.fieldname] && (
         <Text style={styles.error}>{errors[item.fieldname]}</Text>
       )}
@@ -89,10 +91,7 @@ const styles = StyleSheet.create({
   },
   leftLabelContent: {
     flexDirection: "row",
-  },
-  valueIconStyle: {
-    marginLeft: scale(10),
-    alignSelf: "center",
+    gap: scale(3),
   },
   inputStyle: {
     borderRadius: scale(5),
@@ -103,7 +102,16 @@ const styles = StyleSheet.create({
     color: "red",
   },
   textStyle: {
-    color: "black",
+    color: "#71797E",
     fontSize: scale(16),
+    fontWeight: "500",
+  },
+  requiredStyle: {
+    color: "red",
+  },
+  itemSepComStyle: {
+    height: scale(1),
+    backgroundColor: "#ccc",
+    marginBottom: scale(9),
   },
 });
