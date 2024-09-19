@@ -5,12 +5,15 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
+  Animated,
   FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
@@ -24,6 +27,18 @@ export default function DetailsScreen({ navigation, route }) {
   const { item } = route.params;
 
   const [isMenuOpened, setMenuOpened] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (isMenuOpened) {
+        setMenuOpened(false);
+      }
+
+      return () => {
+        setMenuOpened(false);
+      };
+    }, [])
+  );
 
   const handleIconPress = () => {
     setMenuOpened(true);
@@ -104,64 +119,174 @@ export default function DetailsScreen({ navigation, route }) {
     },
   ];
 
+  const rotateAnim = useRef(new Animated.Value(0)).current;
+  const opacityAnim = useRef(new Animated.Value(0)).current;
+
+  const menuAnimRefs = useRef(
+    menuList.map(() => ({
+      opacity: new Animated.Value(0),
+      translateY: new Animated.Value(50),
+    }))
+  ).current;
+
+  useEffect(() => {
+    if (isMenuOpened) {
+      Animated.parallel([
+        Animated.timing(rotateAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityAnim, {
+          toValue: 1,
+          duration: 300,
+          delay: 300,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        menuAnimRefs.forEach((anim, index) => {
+          Animated.parallel([
+            Animated.timing(anim.opacity, {
+              toValue: 1,
+              duration: 300,
+              delay: index * 80,
+              useNativeDriver: true,
+            }),
+            Animated.timing(anim.translateY, {
+              toValue: 0,
+              duration: 300,
+              delay: index * 200,
+              useNativeDriver: true,
+            }),
+          ]).start();
+        });
+      });
+    } else {
+      Animated.parallel([
+        Animated.timing(rotateAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        menuAnimRefs.forEach((anim) => {
+          Animated.parallel([
+            Animated.timing(anim.opacity, {
+              toValue: 0,
+              duration: 0,
+              useNativeDriver: true,
+            }),
+            Animated.timing(anim.translateY, {
+              toValue: 0,
+              duration: 0,
+              useNativeDriver: true,
+            }),
+          ]).start();
+        });
+      });
+    }
+  }, [isMenuOpened]);
+
+  const rotateInterpolation = rotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "45deg"],
+  });
+
+  const handleBackgroundPress = () => {
+    if (isMenuOpened) {
+      setMenuOpened(false);
+    }
+  };
+
   return (
-    <>
-      <View
-        style={[styles.container, { opacity: scale(isMenuOpened ? 0.05 : 1) }]}
-      >
-        <View style={styles.firstBoxStyle}>
-          <Header
-            navigation={navigation}
-            item={item}
+    <TouchableWithoutFeedback onPress={handleBackgroundPress}>
+      <View style={styles.main}>
+        <View
+          style={[
+            styles.container,
+            { opacity: scale(isMenuOpened ? 0.05 : 1) },
+          ]}
+        >
+          <View style={styles.firstBoxStyle}>
+            <Header
+              navigation={navigation}
+              item={item}
+              isMenuOpened={isMenuOpened}
+            />
+          </View>
+          <ContactCard
             isMenuOpened={isMenuOpened}
+            externalStyle={{ zIndex: 2 }}
           />
+          <View style={styles.secondBoxStyle}>
+            <Layout company={item} isMenuOpened={isMenuOpened} />
+          </View>
         </View>
-        <View style={styles.secondBoxStyle}>
-          <ContactCard isMenuOpened={isMenuOpened} />
-          <Layout company={item} isMenuOpened={isMenuOpened} />
-        </View>
-      </View>
 
-      {isMenuOpened && (
-        <View style={styles.menuContainer}>
-          <FlatList
-            data={menuList}
-            renderItem={({ item }) => (
-              <View style={styles.menuStyle}>
-                <View style={styles.noteContainer}>
-                  <Text style={styles.NoteStyle}>{item.Note}</Text>
-                </View>
-
-                <TouchableOpacity
-                  style={styles.btnContainer}
-                  onPress={() => item.handleIconPress()}
+        {isMenuOpened && (
+          <View style={styles.menuContainer}>
+            <FlatList
+              data={menuList}
+              renderItem={({ item, index }) => (
+                <Animated.View
+                  style={[
+                    styles.menuStyle,
+                    {
+                      opacity: menuAnimRefs[index].opacity,
+                      transform: [
+                        { translateY: menuAnimRefs[index].translateY },
+                      ],
+                    },
+                  ]}
                 >
-                  {item.renderIcon()}
-                </TouchableOpacity>
-              </View>
-            )}
-            keyExtractor={(item) => item.Note}
-          />
-        </View>
-      )}
+                  <View style={styles.noteContainer}>
+                    <Text style={styles.NoteStyle}>{item.Note}</Text>
+                  </View>
 
-      <AddBtn
-        onIconPress={handleIconPress}
-        renderIcon={() => (
-          <TouchableOpacity onPress={() => setMenuOpened(!isMenuOpened)}>
-            {isMenuOpened ? (
-              <Entypo name="cross" color="#fff" size={scale(26)} />
-            ) : (
-              <Ionicons name="menu" color="#fff" size={scale(22)} />
-            )}
-          </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.btnContainer}
+                    onPress={() => item.handleIconPress()}
+                  >
+                    {item.renderIcon()}
+                  </TouchableOpacity>
+                </Animated.View>
+              )}
+              keyExtractor={(item) => item.Note}
+              inverted
+            />
+          </View>
         )}
-      />
-    </>
+
+        <AddBtn
+          onIconPress={() => console.log("menuIcon pressed")}
+          renderIcon={() => (
+            <TouchableOpacity onPress={() => setMenuOpened(!isMenuOpened)}>
+              <Animated.View
+                style={{ transform: [{ rotate: rotateInterpolation }] }}
+              >
+                {isMenuOpened ? (
+                  <Entypo name="cross" color="#fff" size={scale(26)} />
+                ) : (
+                  <Ionicons name="menu" color="#fff" size={scale(22)} />
+                )}
+              </Animated.View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -173,19 +298,19 @@ const styles = StyleSheet.create({
   },
   secondBoxStyle: {
     flex: 2,
-    zIndex: 1,
+    zIndex: 0,
   },
   btnContainer: {
-    backgroundColor: "orange",
+    backgroundColor: "#FF5F1F",
     alignItems: "center",
     justifyContent: "center",
     right: scale(0),
-    width: scale(50),
-    height: scale(50),
-    borderRadius: scale(25),
+    width: scale(60),
+    height: scale(60),
+    borderRadius: scale(30),
   },
   menuStyle: {
-    marginBottom: scale(18),
+    marginBottom: scale(12),
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "flex-end",
@@ -197,7 +322,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     position: "absolute",
     right: scale(30),
-    bottom: scale(80),
+    bottom: scale(90),
   },
   noteContainer: {
     backgroundColor: "#fff",

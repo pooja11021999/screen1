@@ -5,7 +5,7 @@ import { moderateScale, scale } from "react-native-size-matters";
 
 import CustomText from "../../../../../assets/commonElements/text";
 
-const ContactCard = ({ isMenuOpened }) => {
+const ContactCard = ({ isMenuOpened, externalStyle }) => {
   const [cardHeight, setCardHeight] = useState(0);
   const viewRef = useRef(null);
 
@@ -15,7 +15,7 @@ const ContactCard = ({ isMenuOpened }) => {
   };
 
   return (
-    <View style={{ marginBottom: scale(cardHeight / 2 + 16) }}>
+    <View style={[{ marginBottom: scale(cardHeight / 2 + 20) }, externalStyle]}>
       <View
         onLayout={handleEvent}
         ref={viewRef}

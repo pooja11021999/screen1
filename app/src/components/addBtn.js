@@ -15,15 +15,16 @@ export default AddBtn;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "orange",
+    elevation: scale(4),
+    backgroundColor: "#FF5F1F",
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
     right: scale(30),
     bottom: scale(30),
-    width: scale(50),
-    height: scale(50),
-    borderRadius: scale(25),
-    marginTop: scale(20)
+    width: scale(60),
+    height: scale(60),
+    borderRadius: scale(30),
+    marginTop: scale(20),
   },
 });
