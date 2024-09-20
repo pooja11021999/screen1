@@ -3,6 +3,8 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
+import { Colors } from "../../../assets/colors.js";
+
 const CustomHeader = ({
   customLeftContent,
   customRightContent,
@@ -18,7 +20,7 @@ const CustomHeader = ({
           onTouchEnd={customLeftOnPress}
         >
           {customLeftContent || (
-            <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
+            <AntDesign name="arrowleft" size={scale(21)} color={Colors.White} />
           )}
         </View>
         <View
@@ -34,7 +36,7 @@ const CustomHeader = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#00477f",
+    backgroundColor: Colors.DarkBlue,
   },
   content: {
     padding: scale(18),

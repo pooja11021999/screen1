@@ -10,7 +10,9 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
+import { Colors } from "../../../assets/colors.js";
 import companyDetailsForm from "../modules/form/companyDetailsForm";
+import LoginScreen from "../modules/loginScreen";
 import DetailsScreen from "../modules/screen1";
 import CompanyList from "../modules/screen2";
 
@@ -19,7 +21,13 @@ const Stack = createStackNavigator();
 const StackNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Company">
+      <Stack.Navigator initialRouteName="LoginScreen">
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="Company"
           component={CompanyList}
@@ -27,19 +35,19 @@ const StackNavigation = () => {
             headerStyle: styles.companyListHeader,
             headerTitleStyle: styles.companyListHeaderTitle,
             headerLeft: () => (
-              <Entypo name="menu" size={scale(20)} color={"white"} />
+              <Entypo name="menu" size={scale(20)} color={Colors.White} />
             ),
             headerLeftContainerStyle: styles.leftHeaderOfCompanyList,
             headerRight: () => (
               <View style={styles.rightHeaderOfCompanyList}>
                 <MaterialCommunityIcons
                   name="sort-variant"
-                  color="#fff"
+                  color={Colors.White}
                   size={scale(23)}
                 />
                 <MaterialIcons
                   name="filter-list"
-                  color="#fff"
+                  color={Colors.White}
                   size={scale(23)}
                   style={styles.filterIcon}
                 />
@@ -61,7 +69,11 @@ const StackNavigation = () => {
             headerShown: false,
             headerTitleStyle: styles.companyDetailsScreenStyle,
             headerBackImage: () => (
-              <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
+              <AntDesign
+                name="arrowleft"
+                size={scale(21)}
+                color={Colors.White}
+              />
             ),
             title: "",
             headerRight: () => (
@@ -80,7 +92,11 @@ const StackNavigation = () => {
             headerShown: false,
             headerTitleStyle: styles.companyDetailsScreenStyle,
             headerBackImage: () => (
-              <AntDesign name="arrowleft" size={scale(21)} color="#fff" />
+              <AntDesign
+                name="arrowleft"
+                size={scale(21)}
+                color={Colors.White}
+              />
             ),
             headerRight: () => (
               <TouchableOpacity>
@@ -91,9 +107,6 @@ const StackNavigation = () => {
             headerStyle: styles.companyDetailsHeaderStyle,
           }}
         />
-
-       
-        
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -113,22 +126,22 @@ export const styles = StyleSheet.create({
     paddingLeft: scale(10),
   },
   companyListHeader: {
-    backgroundColor: "#00477f",
+    backgroundColor: Colors.DarkBlue,
   },
   companyListHeaderTitle: {
-    color: "#fff",
+    color: Colors.White,
   },
   companyDetailsScreenStyle: {
     fontSize: scale(17),
-    color: "white",
+    color: Colors.White,
   },
   companyDetailsHeaderStyle: {
-    backgroundColor: "#00477f",
+    backgroundColor: Colors.DarkBlue,
   },
   rightHeaderOfForm: {
     marginRight: scale(15),
     fontSize: scale(16),
-    color: "#fff",
+    color: Colors.White,
   },
   leftHeaderOfForm: {
     marginLeft: scale(15),

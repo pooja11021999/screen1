@@ -2,11 +2,13 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
+import { Colors } from "../../../../assets/colors.js";
+
 const Card = ({ item, getDetails }) => {
   return (
     <TouchableOpacity style={styles.cardStyle} onPress={() => getDetails(item)}>
       <View>
-        <Text style={styles.cardKeyStyle}>{item.companyName || '-'}</Text>
+        <Text style={styles.cardKeyStyle}>{item.companyName || "-"}</Text>
         <Text style={[styles.cardValueStyle]}>{item.city}</Text>
       </View>
       <View>
@@ -24,11 +26,11 @@ export const styles = StyleSheet.create({
     paddingVertical: verticalScale(10),
     justifyContent: "space-between",
     paddingHorizontal: scale(12),
-    borderBottomColor: "#ccc",
+    borderBottomColor: Colors.LightGrey,
     borderBottomWidth: scale(1),
   },
   cardKeyStyle: {
-    color: "#B2BEB5",
+    color: Colors.GrayishCyan,
     fontSize: scale(16),
     fontWeight: "500",
   },

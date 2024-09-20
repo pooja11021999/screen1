@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
+import { Colors } from "../colors.js";
+import { globalStyles } from "../globalStyle/index.js";
 import DateInput from "./formFields/dateInput";
 import DropDown from "./formFields/dropDown";
 import GooglePlacesInput from "./formFields/googlePlacesInput";
@@ -102,16 +104,15 @@ const styles = StyleSheet.create({
     color: "red",
   },
   textStyle: {
-    color: "#71797E",
-    fontSize: scale(16),
+    ...globalStyles.textStyle({ txtColor: "#71797E" }),
     fontWeight: "500",
   },
   requiredStyle: {
-    color: "red",
+    color: Colors.Red,
   },
   itemSepComStyle: {
     height: scale(1),
-    backgroundColor: "#ccc",
+    backgroundColor: Colors.LightGrey,
     marginBottom: scale(9),
   },
 });

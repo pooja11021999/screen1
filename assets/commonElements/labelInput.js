@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
+import { Colors } from "../colors.js";
 
 const LabelInput = ({
   label,
@@ -34,7 +35,7 @@ const LabelInput = ({
             <Ionicons
               name="chevron-down"
               size={scale(18)}
-              color="#ccc"
+              color={Colors.LightGrey}
               style={{ marginRight: scale(5) }}
             />
           }
@@ -50,7 +51,14 @@ const LabelInput = ({
           style={styles.dateContainerStyle}
           onPress={() => setDatePickerVisible(true)}
         >
-          <Text style={[styles.dateContainerPHStyle,{color:formData.lastContacted ? 'black' : '#ccc'}]}>
+          <Text
+            style={[
+              styles.dateContainerPHStyle,
+              {
+                color: formData.lastContacted ? Colors.Black : Colors.LightGrey,
+              },
+            ]}
+          >
             {formData.lastContacted ? formData.lastContacted : placeholder}
           </Text>
         </TouchableOpacity>
@@ -62,7 +70,7 @@ const LabelInput = ({
           placeholder={placeholder}
           value={formData[fieldname]}
           onChangeText={(value) => handleChange(fieldname, value)}
-          placeholderTextColor="#ccc"
+          placeholderTextColor={Colors.LightGrey}
         />
       );
     }
@@ -87,16 +95,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: scale(-8),
     left: scale(10),
-    backgroundColor: "#fff",
+    backgroundColor: Colors.White,
     zIndex: 1,
     paddingHorizontal: scale(5),
   },
   labelText: {
-    color: "#ccc",
+    color: Colors.LightGrey,
   },
   input: {
     borderWidth: scale(1),
-    borderColor: "#ccc",
+    borderColor: Colors.LightGrey,
     borderRadius: scale(4),
     padding: scale(8),
   },
@@ -110,12 +118,12 @@ const styles = StyleSheet.create({
   dateContainerStyle: {
     height: scale(46),
     borderWidth: scale(1),
-    borderColor: "#ccc",
+    borderColor: Colors.LightGrey,
     borderRadius: scale(4),
     justifyContent: "center",
     paddingHorizontal: scale(6),
   },
   dateContainerPHStyle: {
-    color: "#ccc",
+    color: Colors.LightGrey,
   },
 });

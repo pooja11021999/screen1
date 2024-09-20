@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
+import { Colors } from "../../../assets/colors.js";
+import { globalStyles } from "../../../assets/globalStyle/index.js";
+
 const SearchBar = ({ placeholder, handleSearch }) => {
   const [query, setQuery] = useState("");
 
@@ -15,14 +18,14 @@ const SearchBar = ({ placeholder, handleSearch }) => {
     <View style={styles.main}>
       <Octicons
         name="search"
-        color="black"
+        color={Colors.Black}
         size={scale(18)}
         style={styles.searchBtnStyle}
       />
       <View style={styles.textInputStyle}>
         <TextInput
           placeholder={placeholder}
-          style={styles.textStyle}
+          style={globalStyles.textStyle()}
           value={query}
           onChangeText={handleSearchTextChange}
         ></TextInput>
@@ -47,8 +50,5 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: verticalScale(2),
     paddingHorizontal: scale(5),
-  },
-  textStyle: {
-    fontSize: scale(16),
   },
 });

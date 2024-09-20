@@ -3,6 +3,8 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
+import { Colors } from "../../../assets/colors.js";
+
 const RatingStars = ({ rating }) => {
   const renderStars = () => {
     let stars = [];
@@ -10,15 +12,30 @@ const RatingStars = ({ rating }) => {
     for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
         stars.push(
-          <FontAwesome key={i} name="star" size={scale(24)} color="#FFD700" />
+          <FontAwesome
+            key={i}
+            name="star"
+            size={scale(22)}
+            color={Colors.Yellow}
+          />
         );
       } else if (i - rating < 1 && i - rating > 0) {
         stars.push(
-          <FontAwesome key={i} name="star" size={scale(24)} color="#FFD700" />
+          <FontAwesome
+            key={i}
+            name="star"
+            size={scale(22)}
+            color={Colors.Yellow}
+          />
         );
       } else {
         stars.push(
-          <FontAwesome key={i} name="star-o" size={scale(24)} color="#FFD700" />
+          <FontAwesome
+            key={i}
+            name="star-o"
+            size={scale(22)}
+            color={Colors.Yellow}
+          />
         );
       }
     }

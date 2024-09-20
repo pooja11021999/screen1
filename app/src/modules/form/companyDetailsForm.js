@@ -9,13 +9,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import { scale } from "react-native-size-matters";
 import { connect, useDispatch } from "react-redux";
 
+import { Colors } from "../../../../assets/colors.js";
 import CustomField from "../../../../assets/commonElements/customField";
 import CustomText from "../../../../assets/commonElements/text";
 import Data from "../../../../assets/constantItems";
 import DateTimePicker from "../../../../assets/dateUtils/dateTimePicker";
+import { globalStyles } from "../../../../assets/globalStyle/index.js";
 import AddBtn from "../../components/addBtn";
 import CustomHeader from "../../components/customHeader";
 import {
@@ -130,7 +132,10 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
   const renderSaveBtn = () => {
     return (
       <TouchableOpacity onPress={onSubmit}>
-        <CustomText text="Save" />
+        <CustomText
+          text="Save"
+          externalStyle={globalStyles.textStyle({ txtColor: Colors.White })}
+        />
       </TouchableOpacity>
     );
   };
@@ -169,7 +174,6 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
           />
         )}
         keyExtractor={(item) => item.fieldname}
-        keyboardShouldPersistTaps="always"
         style={styles.formStyle}
         contentContainerStyle={styles.listContainer}
       />
@@ -178,7 +182,7 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
         <AddBtn
           onIconPress={handleIconPress}
           renderIcon={() => (
-            <Ionicons name="attach" size={scale(27)} color="#fff" />
+            <Ionicons name="attach" size={scale(27)} color={Colors.White} />
           )}
         />
       </View>
@@ -199,29 +203,14 @@ const mapStateToProps = (state) => ({
 });
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
+  container: { flex: 1 },
   formStyle: {
     paddingHorizontal: scale(18),
-    backgroundColor: "#fff",
+    backgroundColor: Colors.White,
   },
-  btnContainerStyle: {
-    backgroundColor: "#fff",
-    elevation: moderateScale(9),
-    paddingVertical: verticalScale(12),
-    paddingHorizontal: scale(15),
-    justifyContent: "flex-end",
+  listContainer: {
+    paddingVertical: scale(10),
   },
-  btnStyle: {
-    backgroundColor: "#348ceb",
-    padding: scale(12),
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: scale(8),
-  },
-  listContainer: { paddingVertical: scale(10) },
 });
 
 export default connect(mapStateToProps)(CompanyDetailsForm);

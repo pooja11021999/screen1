@@ -18,6 +18,7 @@ import {
 } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
 
+import { Colors } from "../../../../assets/colors.js";
 import AddBtn from "../../components/addBtn";
 import Layout from "./_layout";
 import ContactCard from "./contactCard";
@@ -52,7 +53,7 @@ export default function DetailsScreen({ navigation, route }) {
     {
       Note: "Add Contacts",
       renderIcon: () => (
-        <MaterialIcons name="contacts" size={scale(20)} color="#fff" />
+        <MaterialIcons name="contacts" size={scale(20)} color={Colors.White} />
       ),
       handleIconPress: handleIconPress,
     },
@@ -62,7 +63,7 @@ export default function DetailsScreen({ navigation, route }) {
         <MaterialCommunityIcons
           name="clipboard-outline"
           size={scale(20)}
-          color="#fff"
+          color={Colors.White}
         />
       ),
       handleIconPress: handleIconPress,
@@ -70,7 +71,7 @@ export default function DetailsScreen({ navigation, route }) {
     {
       Note: "Add Contributor",
       renderIcon: () => (
-        <Ionicons name="person" size={scale(20)} color="#fff" />
+        <Ionicons name="person" size={scale(20)} color={Colors.White} />
       ),
       handleIconPress: handleIconPress,
     },
@@ -80,7 +81,7 @@ export default function DetailsScreen({ navigation, route }) {
         <MaterialCommunityIcons
           name="account-multiple"
           size={scale(20)}
-          color="#fff"
+          color={Colors.White}
         />
       ),
       handleIconPress: handleIconPress,
@@ -88,14 +89,14 @@ export default function DetailsScreen({ navigation, route }) {
     {
       Note: "Add Call",
       renderIcon: () => (
-        <MaterialIcons name="call" size={scale(20)} color="#fff" />
+        <MaterialIcons name="call" size={scale(20)} color={Colors.White} />
       ),
       handleIconPress: handleIconPress,
     },
     {
       Note: "Add Task",
       renderIcon: () => (
-        <FontAwesome6 name="list-ul" size={scale(20)} color="#fff" />
+        <FontAwesome6 name="list-ul" size={scale(20)} color={Colors.White} />
       ),
       handleIconPress: handleIconPress,
     },
@@ -105,7 +106,7 @@ export default function DetailsScreen({ navigation, route }) {
         <MaterialCommunityIcons
           name="white-balance-sunny"
           size={scale(20)}
-          color="#fff"
+          color={Colors.White}
         />
       ),
       handleIconPress: handleIconPress,
@@ -113,7 +114,7 @@ export default function DetailsScreen({ navigation, route }) {
     {
       Note: "Edit",
       renderIcon: () => (
-        <MaterialIcons name="edit" color="#fff" size={scale(25)} />
+        <MaterialIcons name="edit" color={Colors.White} size={scale(25)} />
       ),
       handleIconPress: handleIconPress,
     },
@@ -149,13 +150,13 @@ export default function DetailsScreen({ navigation, route }) {
             Animated.timing(anim.opacity, {
               toValue: 1,
               duration: 300,
-              delay: index * 80,
+              delay: index * 50,
               useNativeDriver: true,
             }),
             Animated.timing(anim.translateY, {
               toValue: 0,
               duration: 300,
-              delay: index * 200,
+              delay: index * 50,
               useNativeDriver: true,
             }),
           ]).start();
@@ -212,7 +213,7 @@ export default function DetailsScreen({ navigation, route }) {
             { opacity: scale(isMenuOpened ? 0.05 : 1) },
           ]}
         >
-          <View style={styles.firstBoxStyle}>
+          <View style={styles.firstBoxStyle({})}>
             <Header
               navigation={navigation}
               item={item}
@@ -222,6 +223,7 @@ export default function DetailsScreen({ navigation, route }) {
           <ContactCard
             isMenuOpened={isMenuOpened}
             externalStyle={{ zIndex: 2 }}
+            item={item}
           />
           <View style={styles.secondBoxStyle}>
             <Layout company={item} isMenuOpened={isMenuOpened} />
@@ -270,9 +272,9 @@ export default function DetailsScreen({ navigation, route }) {
                 style={{ transform: [{ rotate: rotateInterpolation }] }}
               >
                 {isMenuOpened ? (
-                  <Entypo name="cross" color="#fff" size={scale(26)} />
+                  <Entypo name="plus" color={Colors.White} size={scale(26)} />
                 ) : (
-                  <Ionicons name="menu" color="#fff" size={scale(22)} />
+                  <Ionicons name="menu" color={Colors.White} size={scale(22)} />
                 )}
               </Animated.View>
             </TouchableOpacity>
@@ -289,19 +291,19 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.White,
   },
-  firstBoxStyle: {
+  firstBoxStyle: ({ bgColor = Colors.DarkBlue }) => ({
     flex: 1,
-    backgroundColor: "#00477f",
+    backgroundColor: bgColor,
     zIndex: 0,
-  },
+  }),
   secondBoxStyle: {
     flex: 2,
     zIndex: 0,
   },
   btnContainer: {
-    backgroundColor: "#FF5F1F",
+    backgroundColor: Colors.OrangeGiant,
     alignItems: "center",
     justifyContent: "center",
     right: scale(0),
@@ -325,7 +327,7 @@ const styles = StyleSheet.create({
     bottom: scale(90),
   },
   noteContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: Colors.White,
     elevation: moderateScale(2),
     padding: scale(3),
     paddingHorizontal: scale(6),

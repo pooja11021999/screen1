@@ -4,6 +4,8 @@ import { StyleSheet } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { scale, verticalScale } from "react-native-size-matters";
 
+import { Colors } from "../../colors.js";
+
 const GooglePlacesInput = ({ item, handleChange, formData }) => {
   const ref = useRef();
   const [address, setAddress] = useState(null);
@@ -39,7 +41,7 @@ const GooglePlacesInput = ({ item, handleChange, formData }) => {
         onChangeText: (text) => {
           setAddress(text);
         },
-        placeholderTextColor: "#ccc",
+        placeholderTextColor: Colors.LightGrey,
       }}
       styles={styles.googleDefaultStyle}
       debounce={scale(200)}
@@ -47,7 +49,7 @@ const GooglePlacesInput = ({ item, handleChange, formData }) => {
         <FontAwesome
           name="google"
           size={scale(20)}
-          color="#00477f"
+          color={Colors.DarkBlue}
           style={styles.valueIconStyle}
         />
       )}
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
       height: scale(40),
     },
     textInput: {
-      backgroundColor: "#FFFFFF",
+      backgroundColor: Colors.White,
       height: scale(44),
       borderRadius: scale(5),
       paddingVertical: scale(0),
@@ -83,20 +85,20 @@ const styles = StyleSheet.create({
       alignItems: "center",
       borderBottomRightRadius: scale(5),
       borderBottomLeftRadius: scale(5),
-      borderColor: "#c8c7cc",
+      borderColor: Colors.LightGrey,
       borderTopWidth: scale(0.5),
     },
     powered: {},
     listView: {},
     row: {
-      backgroundColor: "#FFFFFF",
+      backgroundColor: Colors.White,
       padding: scale(13),
       height: scale(44),
       flexDirection: "row",
     },
     separator: {
       height: verticalScale(0.5),
-      backgroundColor: "#c8c7cc",
+      backgroundColor: Colors.LightGrey,
     },
     description: {},
     loader: {

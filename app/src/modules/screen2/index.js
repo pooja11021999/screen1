@@ -4,6 +4,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { scale } from "react-native-size-matters";
 import { connect } from "react-redux";
 
+import { Colors } from "../../../../assets/colors.js";
 import AddBtn from "../../components/addBtn";
 import SearchBar from "../../components/searchBar";
 import Card from "./card";
@@ -44,7 +45,7 @@ const CompanyList = ({ navigation, companies }) => {
       <AddBtn
         onIconPress={handleIconPress}
         renderIcon={() => (
-          <Octicons name="plus" color="#fff" size={scale(25)} />
+          <Octicons name="plus" color={Colors.White} size={scale(25)} />
         )}
       />
     </>
@@ -62,7 +63,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   searchBarContainer: {
-    borderBottomColor: "#D3D3D3",
+    borderBottomColor: Colors.LightGrey,
     borderBottomWidth: scale(1),
   },
 });

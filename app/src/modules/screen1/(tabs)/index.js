@@ -2,6 +2,9 @@ import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
+import { Colors } from "../../../../../assets/colors.js";
+import { globalStyles } from "../../../../../assets/globalStyle";
+
 const Index = ({ company }) => {
   const objectToArray = (obj) => {
     return Object.entries(obj).map(([key, value]) => ({ key, value }));
@@ -11,18 +14,17 @@ const Index = ({ company }) => {
 
   const getLabelFromKey = (key) => {
     return key
-      .split("") 
+      .split("")
       .map((char, index) => {
         if (index === 0) {
-          return char.toUpperCase(); 
+          return char.toUpperCase();
         } else if (char === char.toUpperCase()) {
-          return " " + char; 
+          return " " + char;
         }
         return char;
       })
-      .join(""); 
+      .join("");
   };
-  
 
   const renderItem = ({ item }) => {
     return (
@@ -31,7 +33,10 @@ const Index = ({ company }) => {
         <Text
           style={[
             styles.cardValueStyle,
-            { color: item.key === "assignedTo" ? "orange" : "#303030" },
+            {
+              color:
+                item.key === "assignedTo" ? Colors.Orange : Colors.DarkGray,
+            },
           ]}
         >
           {item?.value || "-"}
@@ -41,13 +46,15 @@ const Index = ({ company }) => {
   };
 
   return (
-    <FlatList
-      data={companyData}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.key}
-      contentContainerStyle={styles.containerStyle}
-      ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
-    />
+    <View style={globalStyles.containerStyle}>
+      <FlatList
+        data={companyData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.key}
+        contentContainerStyle={styles.containerStyle}
+        ItemSeparatorComponent={() => <View style={styles.itemSepStyle} />}
+      />
+    </View>
   );
 };
 
@@ -56,20 +63,21 @@ export default Index;
 const styles = StyleSheet.create({
   containerStyle: {
     paddingHorizontal: scale(15),
+    backgroundColor: Colors.White,
   },
   cardStyle: {
     paddingVertical: verticalScale(10),
   },
-  cardKeyStyle: {
-    color: "#B2BEB5",
-    fontSize: scale(16),
-    fontWeight: "500",
-  },
-  cardValueStyle: {
-    fontSize: scale(16),
-  },
+  cardKeyStyle: globalStyles.textStyle({
+    txtColor: Colors.LightGrey,
+    size: 12,
+  }),
+  cardValueStyle: globalStyles.textStyle({
+    txtColor: Colors.Gray,
+    size: 15,
+  }),
   itemSepStyle: {
-    backgroundColor: "#D3D3D3",
-    height: scale(1.2),
+    backgroundColor: Colors.VeryLightGray,
+    height: scale(0.8),
   },
 });

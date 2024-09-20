@@ -1,6 +1,8 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { StyleSheet } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
+import { Colors } from "../../../../assets/colors.js";
 import Index from "./(tabs)";
 import First from "./(tabs)/first";
 import Second from "./(tabs)/second";
@@ -13,20 +15,12 @@ export default function Layout({ company, isMenuOpened }) {
       initialRouteName="Basic Information"
       screenOptions={{
         tabBarScrollEnabled: true,
-        tabBarActiveTintColor: "#00477f",
-        tabBarInactiveTintColor: "#B2BEB5",
-        tabBarIndicatorStyle: {
-          backgroundColor: "#00477f",
-          height: verticalScale(3),
-        },
-        tabBarLabelStyle: {
-          flex: 1,
-          maxWidth: scale(250),
-        },
-        tabBarItemStyle: {
-          width: "auto",
-        },
-        tabBarStyle: isMenuOpened ? { elevation: 0 } : {},
+        tabBarActiveTintColor: Colors.DarkBlue,
+        tabBarInactiveTintColor: Colors.GrayishCyan,
+        tabBarIndicatorStyle: styles.tabBarIndicator,
+        tabBarLabelStyle: { textTransform: "camelcase", ...styles.tabBarLabel },
+        tabBarItemStyle: styles.tabBarItem,
+        tabBarStyle: styles.tabBar,
       }}
     >
       <Tab.Screen name="Basic Information">
@@ -38,3 +32,24 @@ export default function Layout({ company, isMenuOpened }) {
     </Tab.Navigator>
   );
 }
+
+export const styles = StyleSheet.create({
+  tabBarLabel: {
+    flex: 1,
+    minWidth: scale(100),
+    fontWeight: "600",
+    fontSize: scale(15),
+  },
+  tabBarIndicator: {
+    backgroundColor: Colors.DarkBlue,
+    height: verticalScale(3.5),
+  },
+  tabBarItem: {
+    width: "auto",
+  },
+  tabBar: {
+    elevation: 0,
+    borderBottomWidth: scale(0.8),
+    borderBottomColor: Colors.LightGrey,
+  },
+});

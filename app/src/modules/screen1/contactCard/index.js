@@ -1,12 +1,15 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import React, { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
 
+import { Colors } from "../../../../../assets/colors.js";
 import CustomText from "../../../../../assets/commonElements/text";
+import { globalStyles } from "../../../../../assets/globalStyle/index.js";
 
-const ContactCard = ({ isMenuOpened, externalStyle }) => {
+const ContactCard = ({ isMenuOpened, externalStyle, item }) => {
   const [cardHeight, setCardHeight] = useState(0);
+
   const viewRef = useRef(null);
 
   const handleEvent = (event) => {
@@ -15,7 +18,7 @@ const ContactCard = ({ isMenuOpened, externalStyle }) => {
   };
 
   return (
-    <View style={[{ marginBottom: scale(cardHeight / 2 + 20) }, externalStyle]}>
+    <View style={[{ marginBottom: scale(cardHeight / 2 + 10) }, externalStyle]}>
       <View
         onLayout={handleEvent}
         ref={viewRef}
@@ -28,23 +31,24 @@ const ContactCard = ({ isMenuOpened, externalStyle }) => {
         ]}
       >
         <View style={styles.textContainer}>
-          <CustomText text={"Active"} externalStyle={styles.textStyle} />
+          <CustomText text={item.status} externalStyle={styles.textStyle} />
         </View>
         <View style={styles.iconContainer}>
           <FontAwesome
             name="envelope"
-            size={scale(30)}
-            color="#B2BEB5"
+            size={scale(20)}
+            color={Colors.DarkBlue}
             style={styles.icon}
           />
           <View style={styles.circleIconContainer}>
-            <FontAwesome name="phone" size={scale(20)} color="#fff" />
+            <FontAwesome name="phone" size={scale(15)} color={Colors.White} />
           </View>
-          <FontAwesome
+          <FontAwesome5
             name="whatsapp"
-            size={scale(30)}
-            color="#B2BEB5"
-            style={styles.icon}
+            brand={true}
+            size={scale(27)}
+            color={Colors.LimeGreen}
+            style={[styles.icon]}
           />
         </View>
       </View>
@@ -57,7 +61,7 @@ export default ContactCard;
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    backgroundColor: "white",
+    backgroundColor: Colors.White,
     padding: scale(15),
     marginHorizontal: scale(26),
     borderRadius: scale(12),
@@ -69,12 +73,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "flex-end",
     justifyContent: "flex-end",
+    alignItems: "center",
   },
   circleIconContainer: {
-    width: scale(30),
-    height: scale(30),
-    borderRadius: scale(15),
-    backgroundColor: "#B2BEB5",
+    width: scale(24),
+    height: scale(24),
+    borderRadius: scale(12),
+    backgroundColor: Colors.Blue,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: scale(10),
@@ -87,7 +92,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "center",
   },
-  textStyle: {
-    color: "orange",
-  },
+  textStyle: globalStyles.textStyle({
+    txtColor: Colors.Orange,
+    size: 14,
+  }),
 });
