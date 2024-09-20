@@ -13,7 +13,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
@@ -122,6 +121,7 @@ export default function DetailsScreen({ navigation, route }) {
 
   const rotateAnim = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(0)).current;
+  const elevationAnim = useRef(new Animated.Value(0)).current;
 
   const menuAnimRefs = useRef(
     menuList.map(() => ({
@@ -129,6 +129,13 @@ export default function DetailsScreen({ navigation, route }) {
       translateY: new Animated.Value(50),
     }))
   ).current;
+
+  const elevationStyle = {
+    elevation: elevationAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, moderateScale(2)],
+    }),
+  };
 
   useEffect(() => {
     if (isMenuOpened) {
@@ -141,7 +148,6 @@ export default function DetailsScreen({ navigation, route }) {
         Animated.timing(opacityAnim, {
           toValue: 1,
           duration: 300,
-          delay: 300,
           useNativeDriver: true,
         }),
       ]).start(() => {
@@ -159,7 +165,13 @@ export default function DetailsScreen({ navigation, route }) {
               delay: index * 50,
               useNativeDriver: true,
             }),
-          ]).start();
+          ]).start(() => {
+            Animated.timing(elevationAnim, {
+              toValue: 1,
+              duration: 200,
+              useNativeDriver: false,
+            }).start();
+          });
         });
       });
     } else {
@@ -173,6 +185,11 @@ export default function DetailsScreen({ navigation, route }) {
           toValue: 0,
           duration: 300,
           useNativeDriver: true,
+        }),
+        Animated.timing(elevationAnim, {
+          toValue: 0,
+          duration: 0,
+          useNativeDriver: false,
         }),
       ]).start(() => {
         menuAnimRefs.forEach((anim) => {
@@ -205,7 +222,7 @@ export default function DetailsScreen({ navigation, route }) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handleBackgroundPress}>
+    <>
       <View style={styles.main}>
         <View
           style={[
@@ -231,6 +248,13 @@ export default function DetailsScreen({ navigation, route }) {
         </View>
 
         {isMenuOpened && (
+          <TouchableOpacity
+            style={styles.overlay}
+            onPress={handleBackgroundPress}
+          />
+        )}
+
+        {isMenuOpened && (
           <View style={styles.menuContainer}>
             <FlatList
               data={menuList}
@@ -246,9 +270,9 @@ export default function DetailsScreen({ navigation, route }) {
                     },
                   ]}
                 >
-                  <View style={styles.noteContainer}>
+                  <Animated.View style={[styles.noteContainer, elevationStyle]}>
                     <Text style={styles.NoteStyle}>{item.Note}</Text>
-                  </View>
+                  </Animated.View>
 
                   <TouchableOpacity
                     style={styles.btnContainer}
@@ -281,7 +305,7 @@ export default function DetailsScreen({ navigation, route }) {
           )}
         />
       </View>
-    </TouchableWithoutFeedback>
+    </>
   );
 }
 
@@ -292,6 +316,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.White,
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    zIndex: 0,
   },
   firstBoxStyle: ({ bgColor = Colors.DarkBlue }) => ({
     flex: 1,
