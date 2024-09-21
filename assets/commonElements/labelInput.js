@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../colors.js";
+import { globalStyles } from "../globalStyle/index.js";
 
 const LabelInput = ({
   label,
@@ -123,7 +124,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: scale(6),
   },
-  dateContainerPHStyle: {
-    color: Colors.LightGrey,
-  },
+  dateContainerPHStyle: globalStyles.textStyle({ txtColor: Colors.LightGrey }),
 });

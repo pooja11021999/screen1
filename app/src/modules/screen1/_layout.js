@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
 import { Colors } from "../../../../assets/colors.js";
@@ -13,15 +13,29 @@ export default function Layout({ company, isMenuOpened }) {
   return (
     <Tab.Navigator
       initialRouteName="Basic Information"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         tabBarScrollEnabled: true,
         tabBarActiveTintColor: Colors.DarkBlue,
         tabBarInactiveTintColor: Colors.GrayishCyan,
         tabBarIndicatorStyle: styles.tabBarIndicator,
-        tabBarLabelStyle: { textTransform: "camelcase", ...styles.tabBarLabel },
+        tabBarLabel: ({ focused, color }) => (
+          <Text
+            style={[
+              {
+                color,
+                fontSize: scale(14),
+                fontFamily: focused ? "Roboto_700Bold" : "Roboto_400Regular",
+                minWidth: scale(130),
+                textAlign: "center",
+              },
+            ]}
+          >
+            {route.name}
+          </Text>
+        ),
         tabBarItemStyle: styles.tabBarItem,
         tabBarStyle: styles.tabBar,
-      }}
+      })}
     >
       <Tab.Screen name="Basic Information">
         {() => <Index company={company} />}
@@ -34,12 +48,6 @@ export default function Layout({ company, isMenuOpened }) {
 }
 
 export const styles = StyleSheet.create({
-  tabBarLabel: {
-    flex: 1,
-    minWidth: scale(100),
-    fontWeight: "600",
-    fontSize: scale(15),
-  },
   tabBarIndicator: {
     backgroundColor: Colors.DarkBlue,
     height: verticalScale(3.5),

@@ -134,7 +134,10 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
       <TouchableOpacity onPress={onSubmit}>
         <CustomText
           text="Save"
-          externalStyle={globalStyles.textStyle({ txtColor: Colors.White })}
+          externalStyle={globalStyles.textStyle({
+            txtColor: Colors.White,
+            size: 14,
+          })}
         />
       </TouchableOpacity>
     );
@@ -182,7 +185,7 @@ const CompanyDetailsForm = ({ route, location, navigation }) => {
         <AddBtn
           onIconPress={handleIconPress}
           renderIcon={() => (
-            <Ionicons name="attach" size={scale(27)} color={Colors.White} />
+            <Ionicons name="attach" size={scale(25)} color={Colors.White} />
           )}
         />
       </View>

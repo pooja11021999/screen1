@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { scale } from "react-native-size-matters";
 
 import { Colors } from "../../colors.js";
+import { globalStyles } from "../../globalStyle/index.js";
 
 const DateInput = ({ formData, item, setDatePickerVisible }) => {
   return (
@@ -11,10 +12,13 @@ const DateInput = ({ formData, item, setDatePickerVisible }) => {
       onPress={() => setDatePickerVisible(true)}
     >
       <Text
-        style={[
-          styles.dateContainerPHStyle,
-          { color: formData.lastContacted ? Colors.Black : Colors.LightGrey },
-        ]}
+        style={{
+          ...globalStyles.textStyle({
+            txtColor: formData.lastContacted ? Colors.Black : Colors.LightGrey,
+            size: 12,
+          }),
+          paddingLeft: scale(2),
+        }}
       >
         {formData.lastContacted ? formData.lastContacted : item.placeholder}
       </Text>
@@ -28,10 +32,5 @@ const styles = StyleSheet.create({
   dateContainerStyle: {
     height: scale(36),
     justifyContent: "center",
-  },
-  dateContainerPHStyle: {
-    color: Colors.LightGrey,
-    paddingLeft: scale(2),
-    fontSize: scale(16),
   },
 });

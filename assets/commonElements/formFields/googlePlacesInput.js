@@ -5,6 +5,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { scale, verticalScale } from "react-native-size-matters";
 
 import { Colors } from "../../colors.js";
+import { globalStyles } from "../../globalStyle/index.js";
 
 const GooglePlacesInput = ({ item, handleChange, formData }) => {
   const ref = useRef();
@@ -72,12 +73,12 @@ const styles = StyleSheet.create({
       height: scale(40),
     },
     textInput: {
+      ...globalStyles.textStyle({ size: 13 }),
       backgroundColor: Colors.White,
       height: scale(44),
       borderRadius: scale(5),
       paddingVertical: scale(0),
       paddingHorizontal: scale(0),
-      fontSize: scale(17),
       flex: 1,
     },
     poweredContainer: {

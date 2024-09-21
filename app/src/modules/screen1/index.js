@@ -296,7 +296,7 @@ export default function DetailsScreen({ navigation, route }) {
                 style={{ transform: [{ rotate: rotateInterpolation }] }}
               >
                 {isMenuOpened ? (
-                  <Entypo name="plus" color={Colors.White} size={scale(26)} />
+                  <Entypo name="plus" color={Colors.White} size={scale(25)} />
                 ) : (
                   <Ionicons name="menu" color={Colors.White} size={scale(22)} />
                 )}
@@ -336,13 +336,13 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   btnContainer: {
-    backgroundColor: Colors.OrangeGiant,
+    backgroundColor: Colors.PureOrange,
     alignItems: "center",
     justifyContent: "center",
     right: scale(0),
-    width: scale(60),
-    height: scale(60),
-    borderRadius: scale(30),
+    width: scale(54),
+    height: scale(54),
+    borderRadius: scale(27),
   },
   menuStyle: {
     marginBottom: scale(12),
@@ -353,10 +353,11 @@ const styles = StyleSheet.create({
   },
   NoteStyle: {
     textAlign: "right",
+    fontFamily: "Roboto_400Regular",
   },
   menuContainer: {
     position: "absolute",
-    right: scale(30),
+    right: scale(27),
     bottom: scale(90),
   },
   noteContainer: {

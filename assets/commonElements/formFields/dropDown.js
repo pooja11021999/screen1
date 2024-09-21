@@ -12,7 +12,7 @@ const DropDown = ({ handleChange, item, formData, options }) => {
     <Select
       selectedValue={formData[item.fieldname]}
       onValueChange={(value) => handleChange(item.fieldname, value)}
-      style={[globalStyles.textStyle({}), styles.selectStyle]}
+      style={[globalStyles.textStyle({ size: 13 }), styles.selectStyle]}
       placeholder={item.placeholder}
       placeholderTextColor={Colors.LightGrey}
       width={scale(300)}

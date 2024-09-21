@@ -100,11 +100,9 @@ const styles = StyleSheet.create({
     paddingLeft: scale(10),
     paddingVertical: scale(4),
   },
-  error: {
-    color: "red",
-  },
+  error: globalStyles.textStyle({ txtColor: Colors.Red }),
   textStyle: {
-    ...globalStyles.textStyle({ txtColor: "#71797E" }),
+    ...globalStyles.textStyle({ txtColor: Colors.DarkGray, size: 14 }),
     fontWeight: "500",
   },
   requiredStyle: {

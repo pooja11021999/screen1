@@ -3,6 +3,7 @@ import { StyleSheet, TextInput } from "react-native";
 import { scale } from "react-native-size-matters";
 
 import { Colors } from "../../colors.js";
+import { globalStyles } from "../../globalStyle/index.js";
 
 const InputField = ({ item, formData, handleChange }) => {
   return (
@@ -19,10 +20,7 @@ const InputField = ({ item, formData, handleChange }) => {
 export default InputField;
 
 const styles = StyleSheet.create({
-  textStyle: {
-    color: Colors.Black,
-    fontSize: scale(16),
-  },
+  textStyle: globalStyles.textStyle({ size: 13 }),
   inputStyle: {
     paddingLeft: scale(2),
     paddingVertical: scale(4),

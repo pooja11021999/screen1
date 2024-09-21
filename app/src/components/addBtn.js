@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
   container: {
     elevation: scale(4),
     position: "absolute",
-    right: scale(30),
-    bottom: scale(30),
-    width: scale(60),
-    height: scale(60),
-    borderRadius: scale(30),
+    right: scale(27),
+    bottom: scale(27),
+    width: scale(54),
+    height: scale(54),
+    borderRadius: scale(27),
     marginTop: scale(20),
-    ...globalStyles.containerStyle({ bgColor: Colors.OrangeGiant }),
+    ...globalStyles.containerStyle({ bgColor: Colors.PureOrange }),
   },
 });

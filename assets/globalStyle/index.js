@@ -7,7 +7,7 @@ export const globalStyles = StyleSheet.create({
   textStyle: ({ txtColor = Colors.Black, size = 16 } = {}) => ({
     color: txtColor,
     fontSize: scale(size),
-    fontFamily: "Roboto",
+    fontFamily: "Roboto_400Regular",
   }),
   containerStyle: ({ bgColor = Colors.White } = {}) => ({
     flex: 1,

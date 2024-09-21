@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
 import { Colors } from "../../../../../assets/colors.js";
@@ -23,20 +23,11 @@ const Header = ({ navigation, item }) => {
         <RatingStars rating={ratingPer} />
 
         <View style={styles.detailsStyle}>
-          <CustomText
-            text={industryType}
-            externalStyle={styles.detailsTxtStyle}
-          />
+          <Text style={styles.detailsText}>{industryType}</Text>
 
           <View style={styles.lastConnectStyle}>
-            <CustomText
-              text="Last contacted on: "
-              externalStyle={styles.detailsTxtStyle}
-            />
-            <CustomText
-              text={lastContacted}
-              externalStyle={styles.detailsTxtStyle}
-            />
+            <Text style={styles.detailsText}>Last contacted on: </Text>
+            <Text style={styles.detailsText}>{lastContacted}</Text>
           </View>
         </View>
       </View>
@@ -67,11 +58,9 @@ export const styles = StyleSheet.create({
     marginBottom: scale(4),
   },
   lastConnectStyle: { flexDirection: "row" },
-  detailsTxtStyle: {
-    ...globalStyles.textStyle({
-      txtColor: Colors.White,
-      size: 13,
-    }),
-    fontWeight: "700",
+
+  detailsText: {
+    fontFamily: "Roboto_400Regular",
+    ...globalStyles.textStyle({ txtColor: Colors.White, size: 12 }),
   },
 });

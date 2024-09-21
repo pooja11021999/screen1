@@ -13,4 +13,5 @@ export const Colors = {
   Blue: "#00aaff",
   LimeGreen: "#32cd32",
   Red: "#ff0000",
+  PureOrange: "#e66100",
 };

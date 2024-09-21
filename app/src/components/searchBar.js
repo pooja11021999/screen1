@@ -50,5 +50,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: verticalScale(2),
     paddingHorizontal: scale(5),
+    fontFamily: "Roboto_400Regular",
   },
 });

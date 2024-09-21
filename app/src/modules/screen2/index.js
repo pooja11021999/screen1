@@ -45,7 +45,7 @@ const CompanyList = ({ navigation, companies }) => {
       <AddBtn
         onIconPress={handleIconPress}
         renderIcon={() => (
-          <Octicons name="plus" color={Colors.White} size={scale(25)} />
+          <Octicons name="plus" color={Colors.White} size={scale(22)} />
         )}
       />
     </>

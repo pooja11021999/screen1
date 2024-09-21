@@ -15,7 +15,7 @@ const RatingStars = ({ rating }) => {
           <FontAwesome
             key={i}
             name="star"
-            size={scale(22)}
+            size={scale(20)}
             color={Colors.Yellow}
           />
         );
@@ -24,7 +24,7 @@ const RatingStars = ({ rating }) => {
           <FontAwesome
             key={i}
             name="star"
-            size={scale(22)}
+            size={scale(20)}
             color={Colors.Yellow}
           />
         );
@@ -33,7 +33,7 @@ const RatingStars = ({ rating }) => {
           <FontAwesome
             key={i}
             name="star-o"
-            size={scale(22)}
+            size={scale(20)}
             color={Colors.Yellow}
           />
         );

@@ -11,6 +11,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
 import { Colors } from "../../../assets/colors.js";
+import { globalStyles } from "../../../assets/globalStyle/index.js";
 import companyDetailsForm from "../modules/form/companyDetailsForm";
 import LoginScreen from "../modules/loginScreen";
 import DetailsScreen from "../modules/screen1";
@@ -32,6 +33,7 @@ const StackNavigation = () => {
           name="Company"
           component={CompanyList}
           options={{
+            title: "Company",
             headerStyle: styles.companyListHeader,
             headerTitleStyle: styles.companyListHeaderTitle,
             headerLeft: () => (
@@ -96,6 +98,7 @@ const StackNavigation = () => {
                 name="arrowleft"
                 size={scale(21)}
                 color={Colors.White}
+                style={{ alignSelf: "center" }}
               />
             ),
             headerRight: () => (
@@ -130,6 +133,8 @@ export const styles = StyleSheet.create({
   },
   companyListHeaderTitle: {
     color: Colors.White,
+    fontFamily: "Roboto_400Regular",
+    fontSize: scale(17),
   },
   companyDetailsScreenStyle: {
     fontSize: scale(17),
@@ -140,8 +145,8 @@ export const styles = StyleSheet.create({
   },
   rightHeaderOfForm: {
     marginRight: scale(15),
-    fontSize: scale(16),
-    color: Colors.White,
+    alignSelf: "center",
+    ...globalStyles.textStyle({ txtColor: Colors.White }),
   },
   leftHeaderOfForm: {
     marginLeft: scale(15),

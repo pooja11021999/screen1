@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.2.3",
+    "@expo-google-fonts/roboto": "^0.2.3",
     "@expo/metro-runtime": "~3.2.3",
     "@react-native-community/datetimepicker": "8.0.1",
     "@react-native-masked-view/masked-view": "0.3.1",

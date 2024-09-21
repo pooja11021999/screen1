@@ -130,10 +130,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: scale(50),
   },
   forgotPswdStyle: {
+    fontFamily: "Roboto_400Regular",
     alignSelf: "flex-end",
     color: Colors.DarkBlue,
   },
   signInBtnTxt: {
+    fontFamily: "Roboto_400Regular",
     color: Colors.DarkBlue,
     fontSize: scale(17),
     fontWeight: "400",
