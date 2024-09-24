@@ -45,4 +45,5 @@ const styles = StyleSheet.create({
     paddingLeft: scale(2),
     paddingVertical: scale(0),
   },
+  textStyle: globalStyles.textStyle({ size: 13 }),
 });

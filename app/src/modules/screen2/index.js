@@ -8,8 +8,12 @@ import { Colors } from "../../../../assets/colors.js";
 import AddBtn from "../../components/addBtn";
 import SearchBar from "../../components/searchBar";
 import Card from "./card";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { globalStyles } from "../../../../assets/globalStyle/index.js";
 
 const CompanyList = ({ navigation, companies }) => {
+  const insets = useSafeAreaInsets();
+
   const [searchQuery, setSearchQuery] = useState("");
 
   const getDetails = (item) => {
@@ -31,13 +35,14 @@ const CompanyList = ({ navigation, companies }) => {
   );
 
   return (
-    <>
+    <View style={{ flex: 1 }}>
       <View style={styles.searchBarContainer}>
         <SearchBar placeholder="Search" handleSearch={handleSearch} />
       </View>
       <FlatList
         data={searchQuery ? filteredData : companies}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.container}
         renderItem={({ item }) => (
           <Card item={item} navigation={navigation} getDetails={getDetails} />
         )}
@@ -48,7 +53,7 @@ const CompanyList = ({ navigation, companies }) => {
           <Octicons name="plus" color={Colors.White} size={scale(22)} />
         )}
       />
-    </>
+    </View>
   );
 };
 
@@ -61,6 +66,8 @@ export default connect(mapStateToProps)(CompanyList);
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.White,
+    ...globalStyles.containerStyle,
   },
   searchBarContainer: {
     borderBottomColor: Colors.LightGrey,

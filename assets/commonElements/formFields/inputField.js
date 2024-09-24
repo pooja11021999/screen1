@@ -5,14 +5,25 @@ import { scale } from "react-native-size-matters";
 import { Colors } from "../../colors.js";
 import { globalStyles } from "../../globalStyle/index.js";
 
-const InputField = ({ item, formData, handleChange }) => {
+const InputField = ({
+  item,
+  formData,
+  handleChange,
+  customTxtStyle,
+  secureTextEntry,
+}) => {
   return (
     <TextInput
       placeholder={item.placeholder}
       placeholderTextColor={Colors.LightGrey}
       value={formData[item.fieldname]}
       onChangeText={(value) => handleChange(item.fieldname, value)}
-      style={[styles.textStyle, styles.inputStyle, { width: "100%" }]}
+      style={[
+        customTxtStyle ? customTxtStyle : styles.textStyle,
+        styles.inputStyle,
+        { width: "100%" },
+      ]}
+      secureTextEntry={secureTextEntry}
     />
   );
 };
@@ -24,5 +35,6 @@ const styles = StyleSheet.create({
   inputStyle: {
     paddingLeft: scale(2),
     paddingVertical: scale(4),
+    fontFamily: "Roboto_400Regular",
   },
 });

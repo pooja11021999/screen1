@@ -7,7 +7,11 @@ import { globalStyles } from "../../../assets/globalStyle/index.js";
 
 const AddBtn = ({ renderIcon, onIconPress, label }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onIconPress()}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => onIconPress()}
+      activeOpacity={1}
+    >
       {renderIcon()}
     </TouchableOpacity>
   );

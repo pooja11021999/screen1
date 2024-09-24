@@ -5,7 +5,7 @@ import { scale } from "react-native-size-matters";
 
 import { Colors } from "../../../assets/colors.js";
 
-const HeaderMenu = ({ menu, refresh, onLeftBtnPress }) => {
+const HeaderMenu = ({ menu, refresh, onLeftBtnPress, onPressMenu }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.leftIcons} onPress={onLeftBtnPress}>
@@ -20,12 +20,14 @@ const HeaderMenu = ({ menu, refresh, onLeftBtnPress }) => {
           />
         )}
         {menu && (
-          <Entypo
-            name="dots-three-vertical"
-            size={scale(17)}
-            color={Colors.White}
-            style={styles.iconStyle}
-          />
+          <TouchableOpacity onPress={onPressMenu}>
+            <Entypo
+              name="dots-three-vertical"
+              size={scale(17)}
+              color={Colors.White}
+              style={styles.iconStyle}
+            />
+          </TouchableOpacity>
         )}
       </View>
     </View>

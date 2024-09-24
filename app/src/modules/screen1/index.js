@@ -16,7 +16,7 @@ import {
   View,
 } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
-
+import CutomModal from "../../../../assets/commonElements/cutomModal";
 import { Colors } from "../../../../assets/colors.js";
 import AddBtn from "../../components/addBtn";
 import Layout from "./_layout";
@@ -24,9 +24,10 @@ import ContactCard from "./contactCard";
 import Header from "./headerComponent";
 
 export default function DetailsScreen({ navigation, route }) {
-  const { item } = route.params;
+  const { item } = route?.params;
 
   const [isMenuOpened, setMenuOpened] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -41,6 +42,10 @@ export default function DetailsScreen({ navigation, route }) {
   );
 
   const handleIconPress = () => {
+    if (isModalVisible) {
+      setModalVisible(false);
+    }
+
     setMenuOpened(true);
     navigation.navigate("EditCompanyDetailsScreen", {
       edit: true,
@@ -210,6 +215,11 @@ export default function DetailsScreen({ navigation, route }) {
     }
   }, [isMenuOpened]);
 
+  const onPressMenu = () => {
+    console.log("onmenupress");
+    setModalVisible(true);
+  };
+
   const rotateInterpolation = rotateAnim.interpolate({
     inputRange: [0, 1],
     outputRange: ["0deg", "45deg"],
@@ -220,6 +230,8 @@ export default function DetailsScreen({ navigation, route }) {
       setMenuOpened(false);
     }
   };
+
+  const menuOptions = [{ title: "Edit", onPress: handleIconPress }];
 
   return (
     <>
@@ -235,6 +247,7 @@ export default function DetailsScreen({ navigation, route }) {
               navigation={navigation}
               item={item}
               isMenuOpened={isMenuOpened}
+              onPressMenu={onPressMenu}
             />
           </View>
           <ContactCard
@@ -277,6 +290,7 @@ export default function DetailsScreen({ navigation, route }) {
                   <TouchableOpacity
                     style={styles.btnContainer}
                     onPress={() => item.handleIconPress()}
+                    activeOpacity={1}
                   >
                     {item.renderIcon()}
                   </TouchableOpacity>
@@ -303,6 +317,11 @@ export default function DetailsScreen({ navigation, route }) {
               </Animated.View>
             </TouchableOpacity>
           )}
+        />
+        <CutomModal
+          isModalVisible={isModalVisible}
+          setModalVisible={setModalVisible}
+          menuOptions={menuOptions}
         />
       </View>
     </>

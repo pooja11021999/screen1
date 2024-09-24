@@ -17,6 +17,10 @@ const CustomField = ({
   handleChange,
   errors,
   options,
+  labelNotRequired,
+  customTxtStyle,
+  renderRightContent,
+  secureTextEntry, // New prop for secure text entry
 }) => {
   const renderField = () => {
     if (item.isDate) {
@@ -25,6 +29,7 @@ const CustomField = ({
           item={item}
           formData={formData}
           setDatePickerVisible={setDatePickerVisible}
+          customTxtStyle={customTxtStyle}
         />
       );
     } else if (item.isSelect) {
@@ -51,6 +56,8 @@ const CustomField = ({
             formData={formData}
             item={item}
             handleChange={handleChange}
+            customTxtStyle={customTxtStyle}
+            secureTextEntry={secureTextEntry}
           />
         );
       }
@@ -59,24 +66,49 @@ const CustomField = ({
 
   return (
     <View style={styles.cardStyle}>
-      <View style={styles.labelContainerStyle}>
-        <View style={styles.leftLabelContent}>
-          <CustomText text={item.label} externalStyle={styles.textStyle} />
-          <CustomText
-            text={item.required ? "*" : ""}
-            externalStyle={[styles.textStyle, styles.requiredStyle]}
-          />
+      {!labelNotRequired && (
+        <View style={styles.labelContainerStyle}>
+          <View style={styles.leftLabelContent}>
+            <CustomText text={item.label} externalStyle={styles.textStyle} />
+            <CustomText
+              text={item.required ? "*" : ""}
+              externalStyle={[styles.textStyle, styles.requiredStyle]}
+            />
+          </View>
+        </View>
+      )}
+
+      <View style={styles.valueContainerStyle}>
+        <View
+          style={[
+            styles.leftValueContent,
+            { width: renderRightContent ? "90%" : "100%" },
+          ]}
+        >
+          {renderField()}
+        </View>
+        <View
+          style={[
+            styles.rightValueContent,
+            { width: renderRightContent ? "8%" : "0%" },
+          ]}
+        >
+          {renderRightContent && renderRightContent()}
         </View>
       </View>
-
-      <View styles={styles.valueContainerStyle}>
-        <View style={styles.leftValueContent}>{renderField()}</View>
-      </View>
-
-      <View style={styles.itemSepComStyle} />
       {errors[item.fieldname] && (
         <Text style={styles.error}>{errors[item.fieldname]}</Text>
       )}
+      <View
+        style={[
+          styles.itemSepComStyle,
+          {
+            backgroundColor: errors[item.fieldname]
+              ? Colors.Red
+              : Colors.LightGrey,
+          },
+        ]}
+      />
     </View>
   );
 };
@@ -100,7 +132,7 @@ const styles = StyleSheet.create({
     paddingLeft: scale(10),
     paddingVertical: scale(4),
   },
-  error: globalStyles.textStyle({ txtColor: Colors.Red }),
+  error: globalStyles.textStyle({ txtColor: Colors.Red, size: 12 }),
   textStyle: {
     ...globalStyles.textStyle({ txtColor: Colors.DarkGray, size: 14 }),
     fontWeight: "500",
@@ -110,7 +142,15 @@ const styles = StyleSheet.create({
   },
   itemSepComStyle: {
     height: scale(1),
-    backgroundColor: Colors.LightGrey,
     marginBottom: scale(9),
+  },
+  valueContainerStyle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  leftValueContent: {},
+  rightValueContent: {
+    width: "8%",
   },
 });

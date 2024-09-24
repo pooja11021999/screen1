@@ -28,7 +28,7 @@ import {
 const CompanyDetailsForm = ({ route, location, navigation }) => {
   const dispatch = useDispatch();
 
-  const { edit, company } = route.params;
+  const { edit, company } = route?.params;
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     paddingVertical: scale(10),
+    backgroundColor: Colors.White,
   },
 });
 

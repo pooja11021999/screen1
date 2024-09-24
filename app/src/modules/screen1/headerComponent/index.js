@@ -8,7 +8,7 @@ import { globalStyles } from "../../../../../assets/globalStyle";
 import HeaderMenu from "../../../components/header";
 import RatingStars from "../../../components/ratingStars";
 
-const Header = ({ navigation, item }) => {
+const Header = ({ navigation, item, onPressMenu }) => {
   const { companyName, industryType, lastContacted, ratingPer } = item;
 
   const onLeftBtnPress = () => {
@@ -17,7 +17,12 @@ const Header = ({ navigation, item }) => {
 
   return (
     <View style={styles.container}>
-      <HeaderMenu menu={true} refresh={true} onLeftBtnPress={onLeftBtnPress} />
+      <HeaderMenu
+        menu={true}
+        refresh={true}
+        onLeftBtnPress={onLeftBtnPress}
+        onPressMenu={onPressMenu}
+      />
       <View style={styles.contentContainer}>
         <CustomText text={companyName} externalStyle={styles.textStyle} />
         <RatingStars rating={ratingPer} />

@@ -42,6 +42,7 @@ export const styles = StyleSheet.create({
     paddingVertical: verticalScale(5),
     paddingHorizontal: scale(15),
     alignItems: "center",
+    backgroundColor: Colors.White,
   },
   searchBtnStyle: {
     marginRight: scale(8),

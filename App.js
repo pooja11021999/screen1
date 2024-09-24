@@ -12,6 +12,8 @@ import { Provider } from "react-redux";
 import StackNavigation from "./app/src/navigation";
 import { store } from "./app/src/redux/store";
 import { Colors } from "./assets/colors.js";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
 
 const App = () => {
   const [fontsLoaded, fontsError] = useFonts({
@@ -33,7 +35,11 @@ const App = () => {
           style="light"
         />
         <NativeBaseProvider>
-          <StackNavigation />
+          <GestureHandlerRootView>
+            <NavigationContainer>
+              <StackNavigation />
+            </NavigationContainer>
+          </GestureHandlerRootView>
         </NativeBaseProvider>
       </Provider>
     </SafeAreaView>
