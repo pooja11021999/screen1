@@ -4,16 +4,15 @@ import {
   Roboto_700Bold,
   useFonts,
 } from "@expo-google-fonts/roboto";
+import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider } from "native-base";
 import React from "react";
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
-import { Provider } from "react-redux";
-
-import StackNavigation from "./app/src/navigation";
-import { store } from "./app/src/redux/store";
-import { Colors } from "./assets/colors.js";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+
+import DataContextProvider from "./app/src/context/DataContextProvider.js";
+import StackNavigation from "./app/src/navigation/index.jsx";
+import { Colors } from "./assets/colors/index.js";
 
 const App = () => {
   const [fontsLoaded, fontsError] = useFonts({
@@ -28,7 +27,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Provider store={store}>
+      <DataContextProvider>
         <StatusBar
           animated={true}
           backgroundColor={Colors.DarkBlue}
@@ -41,7 +40,7 @@ const App = () => {
             </NavigationContainer>
           </GestureHandlerRootView>
         </NativeBaseProvider>
-      </Provider>
+      </DataContextProvider>
     </SafeAreaView>
   );
 };
