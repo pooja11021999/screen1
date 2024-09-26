@@ -5,7 +5,7 @@ import { scale, verticalScale } from "react-native-size-matters";
 import { Colors } from "../../../../assets/colors/index.js";
 import { globalStyles } from "../../../../assets/globalStyle/index.jsx";
 
-const Card = ({ item, getDetails }) => {
+const CompanyCard = ({ item, getDetails }) => {
   return (
     <TouchableOpacity style={styles.cardStyle} onPress={() => getDetails(item)}>
       <View>
@@ -19,7 +19,7 @@ const Card = ({ item, getDetails }) => {
   );
 };
 
-export default Card;
+export default CompanyCard;
 
 export const styles = StyleSheet.create({
   cardStyle: {
