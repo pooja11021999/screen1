@@ -4,8 +4,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../../colors/index.js";
-import { globalStyles } from "../../globalStyle/index.jsx";
+import { Colors, globalStyles } from "../../helpers/index";
 
 const DropDown = ({ handleChange, item, formData, options }) => {
   return (

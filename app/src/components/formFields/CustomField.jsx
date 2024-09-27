@@ -2,13 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../colors/index.js";
-import { globalStyles } from "../globalStyle/index.jsx";
-import CustomText from "./CustomText.jsx";
-import DateInput from "./formFields/DateInput.jsx";
-import DropDown from "./formFields/DropDown.jsx";
-import GooglePlacesInput from "./formFields/GooglePlacesInput.jsx";
-import InputField from "./formFields/InputField.jsx";
+import { Colors, CustomText, globalStyles } from "../../helpers/index.js";
+import { DateInput, DropDown, GooglePlacesInput, InputField } from "./index.js";
 
 const CustomField = ({
   item,

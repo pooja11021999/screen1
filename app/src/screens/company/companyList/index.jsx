@@ -1,22 +1,53 @@
-import { Octicons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Octicons,
+} from "@expo/vector-icons";
 import React, { useContext, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../../../../assets/colors/index.js";
-import { globalStyles } from "../../../../assets/globalStyle/index.jsx";
-import AddButton from "../../components/AddButton.jsx";
-import SearchBar from "../../components/SearchBar.jsx";
-import { DataContext } from "../../context/DataContextProvider.js";
-import Card from "./Card.jsx";
+import {
+  AddButton,
+  CommonHeader,
+  SearchBar,
+} from "../../../components/index.js";
+import { DataContext } from "../../../context/DataContextProvider.js";
+import { Colors, globalStyles } from "../../../helpers/index.js";
+import CompanyCard from "./CompanyCard.jsx";
 
 const CompanyList = ({ navigation }) => {
   const { data, setData } = useContext(DataContext);
 
+  const rightButtons = [
+    {
+      Button: () => (
+        <MaterialCommunityIcons
+          name="sort-variant"
+          color={Colors.White}
+          size={scale(23)}
+          style={{ marginRight: scale(12) }}
+        />
+      ),
+      ButtonPress: () => console.log("sorting clicked"),
+    },
+    {
+      Button: () => (
+        <MaterialIcons
+          name="filter-list"
+          color={Colors.White}
+          size={scale(23)}
+          style={styles.filterIcon}
+        />
+      ),
+      ButtonPress: () => console.log("filter clicked"),
+    },
+  ];
+
   const [searchQuery, setSearchQuery] = useState("");
 
   const getDetails = (item) => {
-    navigation.navigate("DetailScreen", { item });
+    navigation.navigate("CompanyDetailsScreen", { item });
   };
 
   const handleSearch = (text) => {
@@ -24,7 +55,7 @@ const CompanyList = ({ navigation }) => {
   };
 
   const handleIconPress = () => {
-    navigation.navigate("CompanyDetailsScreen", {});
+    navigation.navigate("CompanyDetailsForm", {});
   };
 
   console.log("data-", data);
@@ -40,6 +71,12 @@ const CompanyList = ({ navigation }) => {
         flex: 1,
       }}
     >
+      <CommonHeader
+        title="Company"
+        leftButton="menu"
+        navigation={navigation}
+        rightButtonContent={rightButtons}
+      />
       <View style={styles.searchBarContainer}>
         <SearchBar placeholder="Search" handleSearch={handleSearch} />
       </View>
@@ -48,7 +85,11 @@ const CompanyList = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.container}
         renderItem={({ item }) => (
-          <Card item={item} navigation={navigation} getDetails={getDetails} />
+          <CompanyCard
+            item={item}
+            navigation={navigation}
+            getDetails={getDetails}
+          />
         )}
         ListEmptyComponent={<Text>No companies found.</Text>}
       />

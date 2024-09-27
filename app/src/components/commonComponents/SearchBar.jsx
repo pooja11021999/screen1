@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
-import { Colors } from "../../../assets/colors/index.js";
-import { globalStyles } from "../../../assets/globalStyle/index.jsx";
+import { Colors, globalStyles } from "../../helpers/index.js";
 
 const SearchBar = ({ placeholder, handleSearch }) => {
   const [query, setQuery] = useState("");

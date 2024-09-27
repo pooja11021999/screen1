@@ -9,20 +9,19 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../../../assets/colors/index.js";
-import { globalStyles } from "../../../assets/globalStyle/index.jsx";
-import Calendar from "../modules/calendar/index.jsx";
-import CompanyList from "../modules/screen2/index";
+import { Colors, globalStyles } from "../../helpers/index.js";
+import { CalendarStack, CompanyStack } from "../../screens/index.js";
 import CustomDrawerContent from "./CustomDrawerContent.jsx";
 
 const Drawer = createDrawerNavigator();
 
-const AppDrawer = () => {
+const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="Company"
+      initialRouteName="CalendarMenu"
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
+        headerShown: false,
         drawerLabelStyle: {
           ...globalStyles.textStyle({
             txtColor: Colors.PearlGrey,
@@ -32,9 +31,11 @@ const AppDrawer = () => {
       }}
     >
       <Drawer.Screen
-        name="Calendar"
-        component={Calendar}
+        name="CalendarMenu"
+        component={CalendarStack}
         options={{
+          title: "Calendar",
+          headerShown: false,
           drawerIcon: () => (
             <MaterialCommunityIcons
               name="calendar"
@@ -44,11 +45,12 @@ const AppDrawer = () => {
           ),
         }}
       />
+
       <Drawer.Screen
-        name="Company"
-        component={CompanyList}
+        name="CompanyMenu"
+        component={CompanyStack}
         options={({ navigation }) => ({
-          headerShown: true,
+          title: "company",
           headerStyle: styles.companyListHeader,
           headerTitleStyle: styles.companyListHeaderTitle,
           drawerIcon: () => (
@@ -88,7 +90,7 @@ const AppDrawer = () => {
   );
 };
 
-export default AppDrawer;
+export default DrawerNavigation;
 
 export const styles = StyleSheet.create({
   filterIcon: {
@@ -108,20 +110,5 @@ export const styles = StyleSheet.create({
     color: Colors.White,
     fontFamily: "Roboto_400Regular",
     fontSize: scale(17),
-  },
-  companyDetailsScreenStyle: {
-    fontSize: scale(17),
-    color: Colors.White,
-  },
-  companyDetailsHeaderStyle: {
-    backgroundColor: Colors.DarkBlue,
-  },
-  rightHeaderOfForm: {
-    marginRight: scale(15),
-    alignSelf: "center",
-    ...globalStyles.textStyle({ txtColor: Colors.White }),
-  },
-  leftHeaderOfForm: {
-    marginLeft: scale(15),
   },
 });

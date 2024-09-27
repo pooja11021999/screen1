@@ -9,10 +9,10 @@ import { NativeBaseProvider } from "native-base";
 import React from "react";
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 import DataContextProvider from "./app/src/context/DataContextProvider.js";
-import StackNavigation from "./app/src/navigation/index.jsx";
-import { Colors } from "./assets/colors/index.js";
+import AppNavigation from "./app/src/navigation/index.jsx";
 
 const App = () => {
   const [fontsLoaded, fontsError] = useFonts({
@@ -36,7 +36,7 @@ const App = () => {
         <NativeBaseProvider>
           <GestureHandlerRootView>
             <NavigationContainer>
-              <StackNavigation />
+              <AppNavigation />
             </NavigationContainer>
           </GestureHandlerRootView>
         </NativeBaseProvider>

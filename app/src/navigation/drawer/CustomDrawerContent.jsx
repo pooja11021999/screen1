@@ -6,8 +6,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../../../assets/colors/index.js";
-import { globalStyles } from "../../../assets/globalStyle/index.jsx";
+import { Colors, globalStyles } from "../../helpers/index.js";
 
 const CustomDrawerContent = (props) => {
   return (

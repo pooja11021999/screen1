@@ -1,10 +1,9 @@
 import React from "react";
 import { View } from "react-native";
 
-import CustomText from "../../../../../assets/commonElements/CustomText";
-import { globalStyles } from "../../../../../assets/globalStyle";
+import { CustomText, globalStyles } from "../../../../helpers/index";
 
-const Second = () => {
+const Third = () => {
   return (
     <View style={globalStyles.containerStyle()}>
       <CustomText
@@ -16,4 +15,4 @@ const Second = () => {
   );
 };
 
-export default Second;
+export default Third;

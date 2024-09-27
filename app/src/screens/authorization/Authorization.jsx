@@ -1,17 +1,16 @@
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { scale, verticalScale } from "react-native-size-matters";
 
-import { Colors } from "../../../../assets/colors/index.js";
-import CustomField from "../../../../assets/commonElements/CustomField.jsx";
-import CustomText from "../../../../assets/commonElements/CustomText.jsx";
-import { globalStyles } from "../../../../assets/globalStyle/index.jsx";
+import { CustomField } from "../../components/index.js";
+import { DataContext } from "../../context/DataContextProvider.js";
+import { Colors, CustomText, Data, globalStyles } from "../../helpers/index.js";
 
-const LoginScreen = ({ navigation }) => {
-  const insets = useSafeAreaInsets();
+export default function Authorization({ navigation }) {
+  const { data, setData } = useContext(DataContext);
 
   const [authData, setAuthData] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({});
@@ -57,7 +56,15 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const handleSignIn = () => {
-    navigation.navigate("Company", {});
+    // if (
+    //   authData.username == Credentials[0].value &&
+    //   authData.password == Credentials[1].value
+    // )
+    setData({
+      LocationData: Data.locationData,
+      FieldData: Data.FieldData,
+      InitialCompanyData: Data.initialCompanyData.companies,
+    });
   };
 
   const renderField = (item) => {
@@ -112,7 +119,7 @@ const LoginScreen = ({ navigation }) => {
         />
       </View>
       <View style={styles.authContainer}>
-        {Credentials.map((item) => renderField(item))}
+        {Credentials?.map((item) => renderField(item))}
         <Text style={styles.forgotPswdStyle}>Forgot Password ? </Text>
         <View style={styles.signInBtnContainer}>
           <TouchableOpacity style={styles.signInBtn} onPress={handleSignIn}>
@@ -127,11 +134,9 @@ const LoginScreen = ({ navigation }) => {
       </View>
     </View>
   );
-};
+}
 
-export default LoginScreen;
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: Colors.DarkBlue,

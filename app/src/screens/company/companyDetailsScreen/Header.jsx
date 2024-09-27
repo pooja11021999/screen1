@@ -2,11 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
-import { Colors } from "../../../../../assets/colors/index.js";
-import CustomText from "../../../../../assets/commonElements/CustomText.jsx";
-import { globalStyles } from "../../../../../assets/globalStyle/index.jsx";
-import HeaderMenu from "../../../components/HeaderMenu.jsx";
-import RatingStars from "../../../components/RatingStars.jsx";
+import { HeaderMenu, RatingStars } from "../../../components/index.js";
+import { Colors, CustomText, globalStyles } from "../../../helpers/index.js";
 
 const Header = ({ navigation, item, onPressMenu }) => {
   const { companyName, industryType, lastContacted, ratingPer } = item;

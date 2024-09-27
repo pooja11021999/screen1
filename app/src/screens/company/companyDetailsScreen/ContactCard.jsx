@@ -3,9 +3,7 @@ import React, { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
 
-import { Colors } from "../../../../../assets/colors/index.js";
-import CustomText from "../../../../../assets/commonElements/CustomText.jsx";
-import { globalStyles } from "../../../../../assets/globalStyle/index.jsx";
+import { Colors, CustomText, globalStyles } from "../../../helpers/index";
 
 const ContactCard = ({ isMenuOpened, externalStyle, item }) => {
   const [cardHeight, setCardHeight] = useState(0);

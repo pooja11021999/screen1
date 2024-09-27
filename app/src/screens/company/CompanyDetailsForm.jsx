@@ -11,14 +11,14 @@ import {
 } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../../../../assets/colors/index.js";
-import CustomField from "../../../../assets/commonElements/CustomField.jsx";
-import CustomText from "../../../../assets/commonElements/CustomText.jsx";
-import DateTimePicker from "../../../../assets/dateUtils/DateTimePicker.jsx";
-import { globalStyles } from "../../../../assets/globalStyle/index.jsx";
-import AddButton from "../../components/AddButton.jsx";
-import CustomHeader from "../../components/CustomHeader.jsx";
+import {
+  AddButton,
+  CustomField,
+  CustomHeader,
+  DateTimePicker,
+} from "../../components/index.js";
 import { DataContext } from "../../context/DataContextProvider.js";
+import { Colors, CustomText, globalStyles } from "../../helpers/index.js";
 
 const CompanyDetailsForm = ({ route, navigation }) => {
   const { data, setData } = useContext(DataContext);
@@ -96,12 +96,6 @@ const CompanyDetailsForm = ({ route, navigation }) => {
       newErrors.companyName = "Company Name is required";
     if (!formData.email || !/^[^@]+@[^@]+\.[^@]+$/.test(formData.email))
       newErrors.email = "Valid email is required";
-    // if (!formData.assignedTo) newErrors.assignedTo = "Assigned To is required";
-    // if (!formData.address) newErrors.address = "Address is required";
-    // if (!formData.country) newErrors.country = "Country is required";
-    // if (!formData.state) newErrors.state = "State is required";
-    // if (!formData.city) newErrors.city = "City is required";
-    // if (!formData.pinCode) newErrors.pinCode = "PIN Code is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -115,7 +109,7 @@ const CompanyDetailsForm = ({ route, navigation }) => {
           company.id === formData.id ? { ...company, ...formData } : company
         )
       );
-      navigation.navigate("Company", {});
+      navigation.navigate("CompanyList", {});
     } else {
       setData((prev) => ({
         ...prev,

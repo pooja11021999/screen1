@@ -4,8 +4,7 @@ import { StyleSheet } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { scale, verticalScale } from "react-native-size-matters";
 
-import { Colors } from "../../colors/index.js";
-import { globalStyles } from "../../globalStyle/index.jsx";
+import { Colors, globalStyles } from "../../helpers/index";
 
 const GooglePlacesInput = ({ item, handleChange, formData }) => {
   const ref = useRef();

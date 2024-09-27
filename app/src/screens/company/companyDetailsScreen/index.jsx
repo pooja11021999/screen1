@@ -17,14 +17,13 @@ import {
 } from "react-native";
 import { moderateScale, scale } from "react-native-size-matters";
 
-import { Colors } from "../../../../assets/colors/index.js";
-import CutomModal from "../../../../assets/commonElements/CutomModal.jsx";
-import AddButton from "../../components/AddButton.jsx";
-import Layout from "./_layout.jsx";
-import ContactCard from "./contactCard/index.jsx";
-import Header from "./headerComponent/index.jsx";
+import { AddButton, CustomModal } from "../../../components/index.js";
+import { Colors } from "../../../helpers/index.js";
+import ContactCard from "./ContactCard.jsx";
+import Header from "./Header.jsx";
+import Layout from "./Layout.jsx";
 
-export default function DetailsScreen({ navigation, route }) {
+export default function CompanyDetailsScreen({ navigation, route }) {
   const { item } = route?.params;
 
   const [isMenuOpened, setMenuOpened] = useState(false);
@@ -48,7 +47,7 @@ export default function DetailsScreen({ navigation, route }) {
     }
 
     setMenuOpened(true);
-    navigation.navigate("EditCompanyDetailsScreen", {
+    navigation.navigate("EditCompanyDetailsForm", {
       edit: true,
       company: item,
     });
@@ -319,7 +318,7 @@ export default function DetailsScreen({ navigation, route }) {
             </TouchableOpacity>
           )}
         />
-        <CutomModal
+        <CustomModal
           isModalVisible={isModalVisible}
           setModalVisible={setModalVisible}
           menuOptions={menuOptions}

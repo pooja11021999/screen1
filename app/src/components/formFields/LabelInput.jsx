@@ -10,8 +10,7 @@ import {
 } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
-import { Colors } from "../colors/index.js";
-import { globalStyles } from "../globalStyle/index.jsx";
+import { Colors, globalStyles } from "../../helpers/index";
 
 const LabelInput = ({
   label,

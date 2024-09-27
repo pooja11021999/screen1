@@ -11,8 +11,7 @@ import {
 } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../colors/index.js";
-import { globalStyles } from "../globalStyle/index.jsx";
+import { Colors, globalStyles } from "../../helpers/index.js";
 
 const CustomModal = ({ isModalVisible, setModalVisible, menuOptions }) => {
   const renderItem = (item) => {

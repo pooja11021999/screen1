@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
-import { Colors } from "../../../assets/colors/index.js";
+import { Colors } from "../../helpers/index";
 
 const HeaderMenu = ({ menu, refresh, onLeftBtnPress, onPressMenu }) => {
   return (

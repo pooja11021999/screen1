@@ -2,8 +2,7 @@ import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 
-import { Colors } from "../../../../../assets/colors/index.js";
-import { globalStyles } from "../../../../../assets/globalStyle/index.jsx";
+import { Colors, globalStyles } from "../../../../helpers/index";
 
 const Index = ({ company }) => {
   const objectToArray = (obj) => {
